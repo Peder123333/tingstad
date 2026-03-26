@@ -1,638 +1,437 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tingstad Måleri AB</title>
-<link rel="stylesheet" href="style.css">
-<style>
-/* ── HERO ── */
-.hero {
-  padding-top: 64px;
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: var(--white);
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tingstad Måleri AB | Professionell Målare i Göteborg</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-.hero-left {
-  padding: 7rem 4rem 5rem 4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-right: 1px solid var(--border);
-}
+    <style>
+        :root {
+            --white: #ffffff;
+            --snow: #f8f8f8;
+            --light: #f0f0f0;
+            --border: #e2e2e2;
+            --muted: #666666;
+            --dark: #333333;
+            --black: #111111;
+        }
 
-.hero-left h1 {
-  font-size: clamp(5rem, 9vw, 10rem);
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-}
+        /* ── BAS ── */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: var(--black); 
+            line-height: 1.6;
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
 
-.hero-sub {
-  font-size: 1rem;
-  color: var(--muted);
-  line-height: 1.85;
-  max-width: 380px;
-  margin-bottom: 2.5rem;
-}
+        a { text-decoration: none; transition: 0.2s; }
 
-.hero-btns {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 4rem;
-}
+        /* ── NAVIGERING ── */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            height: 70px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
 
-.hero-bottom {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0;
-  border-top: 1px solid var(--border);
-  padding-top: 2.5rem;
-}
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.05em;
+            color: var(--black);
+        }
 
-.hero-stat-item {
-  padding-right: 2rem;
-}
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
 
-.hero-stat-item + .hero-stat-item {
-  padding-left: 2rem;
-  border-left: 1px solid var(--border);
-}
+        .nav-menu a {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+        }
 
-.hero-stat-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.4rem;
-  letter-spacing: 0.04em;
-  color: var(--black);
-  line-height: 1;
-}
+        .nav-menu a:hover, .nav-menu a.active { color: var(--black); }
 
-.hero-stat-txt {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  margin-top: 0.25rem;
-}
+        .nav-btn {
+            background: var(--black);
+            color: var(--white) !important;
+            padding: 0.8rem 1.5rem;
+        }
 
-/* ── HERO RIGHT ── */
-.hero-right {
-  background: var(--snow);
-  padding: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 3px;
-}
+        /* ── KNAPPAR ── */
+        .btn-dark {
+            background: var(--black);
+            color: var(--white);
+            padding: 1.2rem 2.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            display: inline-block;
+        }
 
-.cert-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px;
-}
+        .btn-ghost {
+            border: 1px solid var(--border);
+            color: var(--black);
+            padding: 1.2rem 2.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            display: inline-block;
+        }
 
-.cert-box {
-  background: var(--white);
-  padding: 2rem 1.8rem;
-  border: 1px solid var(--border);
-  transition: background 0.2s;
-}
+        .btn-white {
+            background: var(--white);
+            color: var(--black);
+            padding: 1.2rem 2.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
 
-.cert-box:hover { background: var(--light); }
+        /* ── HJÄLPKLASSER ── */
+        .grid-1px { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 1rem; }
+        .h-display { font-family: 'Bebas Neue', sans-serif; line-height: 0.95; letter-spacing: -0.01em; }
 
-.cert-box-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.8rem;
-  letter-spacing: 0.04em;
-  color: var(--black);
-  line-height: 1;
-  margin-bottom: 0.3rem;
-}
+        /* ── HERO ── */
+        .hero {
+            padding-top: 70px;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
 
-.cert-box-name {
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
-}
+        .hero-left {
+            padding: 7rem 4rem 5rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 1px solid var(--border);
+        }
 
-.cert-box-desc {
-  font-size: 0.78rem;
-  color: var(--muted);
-  line-height: 1.6;
-}
+        .hero-left h1 { font-size: clamp(4rem, 8vw, 9rem); margin: 1.5rem 0 2rem; }
+        .hero-sub { font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 400px; margin-bottom: 2.5rem; }
+        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
 
-.contact-bar {
-  background: var(--black);
-  padding: 1.6rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+        .hero-bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            border-top: 1px solid var(--border);
+            padding-top: 2.5rem;
+        }
 
-.contact-bar-phone {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.06em;
-  color: var(--white);
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
+        .hero-stat-item { padding-right: 2rem; }
+        .hero-stat-item + .hero-stat-item { padding-left: 2rem; border-left: 1px solid var(--border); }
+        .hero-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--black); line-height: 1; }
+        .hero-stat-txt { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: 0.4rem; }
 
-.contact-bar-phone:hover { opacity: 0.65; }
+        .hero-right {
+            background: var(--snow);
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 3px;
+        }
 
-.contact-bar-right {
-  text-align: right;
-}
+        .cert-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+        .cert-box { background: var(--white); padding: 2.5rem 2rem; border: 1px solid var(--border); }
+        .cert-box-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 0.5rem; }
+        .cert-box-name { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 0.5rem; }
+        .cert-box-desc { font-size: 0.8rem; color: var(--muted); }
 
-.contact-bar-label {
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  margin-bottom: 0.15rem;
-}
+        .contact-bar { background: var(--black); padding: 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .contact-bar-phone { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--white); letter-spacing: 0.05em; }
+        .contact-bar-label { font-size: 0.6rem; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.2rem; }
+        .contact-bar-open { font-size: 0.8rem; color: rgba(255,255,255,0.7); }
 
-.contact-bar-open {
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.6);
-}
+        /* ── TICKER ── */
+        .ticker { background: var(--black); height: 50px; display: flex; align-items: center; overflow: hidden; }
+        .ticker-track { display: flex; gap: 4rem; animation: ticker 25s linear infinite; white-space: nowrap; }
+        @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .ticker-item { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 1rem; }
+        .ticker-sep { width: 4px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 50%; }
 
-/* ── TICKER ── */
-.ticker {
-  background: var(--black);
-  height: 44px;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
+        /* ── TJÄNSTER ── */
+        .services-section { padding: 8rem 4rem; max-width: 1400px; margin: 0 auto; }
+        .section-hdr { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+        .section-hdr h2 { font-size: clamp(2.5rem, 4vw, 4rem); }
+        .srv-grid { grid-template-columns: repeat(3, 1fr); }
+        .srv-cell { background: var(--white); padding: 3.5rem 2.5rem; position: relative; overflow: hidden; }
+        .srv-cell:hover { background: var(--snow); }
+        .srv-cell::after { content: ''; position: absolute; bottom: 0; left: 0; height: 3px; width: 0; background: var(--black); transition: 0.4s; }
+        .srv-cell:hover::after { width: 100%; }
+        .srv-n { font-size: 0.65rem; font-weight: 600; color: var(--border); margin-bottom: 2rem; letter-spacing: 0.2em; }
+        .srv-icon { font-size: 1.8rem; margin-bottom: 1.5rem; }
+        .srv-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; margin-bottom: 0.8rem; }
+        .srv-desc { font-size: 0.9rem; color: var(--muted); }
 
-.ticker-track {
-  display: flex;
-  gap: 4rem;
-  animation: ticker 20s linear infinite;
-  white-space: nowrap;
-}
+        /* ── PROJEKT ── */
+        .projects-teaser { background: var(--snow); padding: 8rem 4rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .projects-teaser-inner { max-width: 1400px; margin: 0 auto; }
+        .proj-thumb-row { grid-template-columns: repeat(3, 1fr); margin-top: 3rem; }
+        .proj-thumb { background: var(--white); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .proj-thumb-empty { text-align: center; color: var(--border); }
+        .proj-thumb-empty span:first-child { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+        .proj-thumb-empty span:last-child { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; }
 
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
+        /* ── REVIEWS ── */
+        .reviews-section { padding: 8rem 4rem; max-width: 1400px; margin: 0 auto; }
+        .reviews-grid { grid-template-columns: 1fr 1fr; }
+        .review-cell { background: var(--white); padding: 3.5rem; }
+        .review-stars { color: #f2b01e; margin-bottom: 1.5rem; font-size: 0.8rem; }
+        .review-body { font-size: 1rem; font-style: italic; color: var(--dark); margin-bottom: 2.5rem; line-height: 1.8; }
+        .review-author { display: flex; align-items: center; gap: 1rem; }
+        .review-av { width: 45px; height: 45px; background: var(--black); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; }
+        .review-name { font-size: 0.9rem; font-weight: 600; }
+        .review-src { font-size: 0.75rem; color: var(--muted); }
 
-.ticker-item {
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-shrink: 0;
-}
+        /* ── CTA ── */
+        .cta-strip { background: var(--black); padding: 8rem 4rem; }
+        .cta-strip-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .cta-strip h2 { font-size: clamp(2.5rem, 5vw, 5rem); color: var(--white); max-width: 700px; }
 
-.ticker-sep {
-  width: 3px;
-  height: 3px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 50%;
-}
+        /* ── FOOTER ── */
+        footer { background: var(--white); padding: 6rem 4rem 3rem; border-top: 1px solid var(--border); }
+        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 4rem; max-width: 1400px; margin: 0 auto 6rem; }
+        .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; display: block; margin-bottom: 1.5rem; }
+        .footer-tagline { color: var(--muted); font-size: 0.9rem; max-width: 300px; }
+        .footer-col h5 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 2rem; color: var(--black); }
+        .footer-col a, .footer-col span { display: block; margin-bottom: 0.8rem; color: var(--muted); font-size: 0.85rem; }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 2rem; max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .footer-copy { font-size: 0.75rem; color: var(--muted); }
+        .footer-iso { display: flex; gap: 2rem; font-size: 0.7rem; font-weight: 600; color: var(--black); }
 
-/* ── SERVICES ── */
-.services-section {
-  padding: 6rem 4rem;
-  max-width: 1280px;
-  margin: 0 auto;
-}
+        /* ── RESPONSIVITET ── */
+        @media (max-width: 1024px) {
+            nav { padding: 0 2rem; }
+            .hero { grid-template-columns: 1fr; }
+            .hero-right { display: none; }
+            .hero-left { padding: 5rem 2rem; border-right: none; }
+            .services-section, .projects-teaser, .reviews-section, .cta-strip, footer { padding: 5rem 2rem; }
+            .footer-top { grid-template-columns: 1fr 1fr; }
+            .cta-strip-inner { flex-direction: column; align-items: flex-start; gap: 3rem; }
+        }
 
-.section-hdr {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.section-hdr h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); }
-
-.srv-grid {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.srv-cell {
-  background: var(--white);
-  padding: 2.8rem 2.2rem;
-  position: relative;
-  transition: background 0.2s;
-  overflow: hidden;
-}
-
-.srv-cell:hover { background: var(--snow); }
-
-.srv-cell::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0;
-  height: 2px; width: 0;
-  background: var(--black);
-  transition: width 0.4s;
-}
-
-.srv-cell:hover::after { width: 100%; }
-
-.srv-n {
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--border);
-  margin-bottom: 2rem;
-}
-
-.srv-icon { font-size: 1.4rem; margin-bottom: 1rem; }
-
-.srv-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.3rem;
-  letter-spacing: 0.04em;
-  color: var(--black);
-  margin-bottom: 0.6rem;
-}
-
-.srv-desc {
-  font-size: 0.82rem;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-/* ── PROJECTS TEASER ── */
-.projects-teaser {
-  background: var(--snow);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 6rem 4rem;
-}
-
-.projects-teaser-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.proj-thumb-row {
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 3rem;
-}
-
-.proj-thumb {
-  background: var(--light);
-  aspect-ratio: 4/3;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.proj-thumb img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s;
-}
-
-.proj-thumb:hover img { transform: scale(1.04); }
-
-.proj-thumb-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--border);
-}
-
-.proj-thumb-empty span:first-child { font-size: 2rem; opacity:0.4; }
-.proj-thumb-empty span:last-child  {
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-/* ── REVIEWS ── */
-.reviews-section {
-  padding: 6rem 4rem;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.reviews-grid {
-  grid-template-columns: 1fr 1fr;
-}
-
-.review-cell {
-  background: var(--white);
-  padding: 2.5rem;
-}
-
-.review-stars {
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
-  color: var(--black);
-  margin-bottom: 1.2rem;
-}
-
-.review-body {
-  font-size: 0.9rem;
-  color: var(--dark);
-  line-height: 1.8;
-  font-style: italic;
-  margin-bottom: 2rem;
-}
-
-.review-author {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-}
-
-.review-av {
-  width: 36px; height: 36px;
-  background: var(--black);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
-  color: var(--white);
-  flex-shrink: 0;
-}
-
-.review-name {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--black);
-}
-
-.review-src {
-  font-size: 0.7rem;
-  color: var(--muted);
-  margin-top: 0.1rem;
-}
-
-/* ── CTA STRIP ── */
-.cta-strip {
-  background: var(--black);
-  padding: 5rem 4rem;
-}
-
-.cta-strip-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 3rem;
-}
-
-.cta-strip h2 {
-  font-size: clamp(2.2rem, 4vw, 3.8rem);
-  color: var(--white);
-  max-width: 600px;
-}
-
-@media (max-width:960px) {
-  .hero { grid-template-columns:1fr; }
-  .hero-left { padding:4rem 1.5rem; }
-  .hero-right { display:none; }
-  .services-section { padding:4rem 1.5rem; }
-  .srv-grid { grid-template-columns:1fr 1fr; }
-  .projects-teaser { padding:4rem 1.5rem; }
-  .proj-thumb-row { grid-template-columns:1fr 1fr; }
-  .reviews-section { padding:4rem 1.5rem; }
-  .reviews-grid { grid-template-columns:1fr; }
-  .cta-strip { padding:4rem 1.5rem; }
-  .cta-strip-inner { flex-direction:column; align-items:flex-start; }
-}
-
-@media (max-width:600px) {
-  .srv-grid { grid-template-columns:1fr; }
-  .proj-thumb-row { grid-template-columns:1fr; }
-}
-</style>
+        @media (max-width: 768px) {
+            .srv-grid, .proj-thumb-row, .reviews-grid { grid-template-columns: 1fr; }
+            .nav-menu { display: none; } /* Enkelhet för mobil */
+            .hero-left h1 { font-size: 4.5rem; }
+            .hero-bottom { grid-template-columns: 1fr; gap: 1.5rem; }
+            .hero-stat-item + .hero-stat-item { border-left: none; padding-left: 0; }
+        }
+    </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">Tingstad Måleri</a>
-  <ul class="nav-menu">
-    <li><a href="index.html" class="active">Hem</a></li>
-    <li><a href="projekt.html">Projekt</a></li>
-    <li><a href="om-oss.html">Om oss</a></li>
-    <li><a href="kontakt.html" class="nav-btn">Kontakt</a></li>
-  </ul>
+    <a class="nav-logo" href="#">Tingstad Måleri</a>
+    <ul class="nav-menu">
+        <li><a href="#" class="active">Hem</a></li>
+        <li><a href="#">Projekt</a></li>
+        <li><a href="#">Om oss</a></li>
+        <li><a href="#" class="nav-btn">Kontakt</a></li>
+    </ul>
 </nav>
 
 <section class="hero">
-  <div class="hero-left">
-    <div>
-      <div class="label au d1">ISO 9001 &amp; 14001 Certifierade</div>
-      <h1 class="h-display au d2">Tingstad<br>Måleri.</h1>
-      <p class="hero-sub au d3">Alla typer av måleriuppdrag i Göteborg och omnejd. Hög kvalitet, licensierade hantverkare, alltid öppet.</p>
-      <div class="hero-btns au d4">
-        <a href="kontakt.html" class="btn-dark">Begär offert</a>
-        <a href="projekt.html" class="btn-ghost">Se projekt</a>
-      </div>
+    <div class="hero-left">
+        <div>
+            <div class="label">ISO 9001 &amp; 14001 Certifierade</div>
+            <h1 class="h-display">Tingstad<br>Måleri.</h1>
+            <p class="hero-sub">Alla typer av måleriuppdrag i Göteborg och omnejd. Hög kvalitet, licensierade hantverkare, alltid tillgängliga.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn-dark">Begär offert</a>
+                <a href="#" class="btn-ghost">Se projekt</a>
+            </div>
+        </div>
+        <div class="hero-bottom">
+            <div class="hero-stat-item">
+                <div class="hero-stat-num">ISO</div>
+                <div class="hero-stat-txt">Kvalitetssäkrade</div>
+            </div>
+            <div class="hero-stat-item">
+                <div class="hero-stat-num">80%</div>
+                <div class="hero-stat-txt">Rekommenderar oss</div>
+            </div>
+            <div class="hero-stat-item">
+                <div class="hero-stat-num">24/7</div>
+                <div class="hero-stat-txt">Alltid öppet</div>
+            </div>
+        </div>
     </div>
-    <div class="hero-bottom au d5">
-      <div class="hero-stat-item">
-        <div class="hero-stat-num">ISO</div>
-        <div class="hero-stat-txt">Certifierade</div>
-      </div>
-      <div class="hero-stat-item">
-        <div class="hero-stat-num">80%</div>
-        <div class="hero-stat-txt">Rekommenderar</div>
-      </div>
-      <div class="hero-stat-item">
-        <div class="hero-stat-num">24/7</div>
-        <div class="hero-stat-txt">Alltid öppet</div>
-      </div>
+    <div class="hero-right">
+        <div class="cert-row">
+            <div class="cert-box">
+                <div class="cert-box-num">9001</div>
+                <div class="cert-box-name">ISO Kvalitet</div>
+                <div class="cert-box-desc">Systematisk kvalitetsstyrning på varje uppdrag.</div>
+            </div>
+            <div class="cert-box">
+                <div class="cert-box-num">14001</div>
+                <div class="cert-box-name">ISO Miljö</div>
+                <div class="cert-box-desc">Certifierat miljöarbete och hållbara produkter.</div>
+            </div>
+            <div class="cert-box">
+                <div class="cert-box-num">100%</div>
+                <div class="cert-box-name">Licensierat</div>
+                <div class="cert-box-desc">Auktoriserade målare med full kompetens.</div>
+            </div>
+            <div class="cert-box">
+                <div class="cert-box-num">ROT</div>
+                <div class="cert-box-name">Skatteavdrag</div>
+                <div class="cert-box-desc">Vi hanterar ROT-avdraget direkt på fakturan.</div>
+            </div>
+        </div>
+        <div class="contact-bar">
+            <div>
+                <div class="contact-bar-label">Ring oss direkt</div>
+                <a href="tel:030212539" class="contact-bar-phone">0302-125 39</a>
+            </div>
+            <div style="text-align: right;">
+                <div class="contact-bar-label">Öppettider</div>
+                <div class="contact-bar-open">Alltid öppet</div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="hero-right au d3">
-    <div class="cert-row">
-      <div class="cert-box">
-        <div class="cert-box-num">9001</div>
-        <div class="cert-box-name">ISO Kvalitet</div>
-        <div class="cert-box-desc">Systematisk kvalitetsstyrning på varje uppdrag.</div>
-      </div>
-      <div class="cert-box">
-        <div class="cert-box-num">14001</div>
-        <div class="cert-box-name">ISO Miljö</div>
-        <div class="cert-box-desc">Certifierat miljöarbete och hållbara produkter.</div>
-      </div>
-      <div class="cert-box">
-        <div class="cert-box-num">100%</div>
-        <div class="cert-box-name">Licensierat</div>
-        <div class="cert-box-desc">Auktoriserade målare med full kompetens.</div>
-      </div>
-      <div class="cert-box">
-        <div class="cert-box-num">ROT</div>
-        <div class="cert-box-name">Avdrag</div>
-        <div class="cert-box-desc">Vi hanterar ROT-avdraget åt dig.</div>
-      </div>
-    </div>
-    <div class="contact-bar">
-      <a href="tel:030212539" class="contact-bar-phone">0302-125 39</a>
-      <div class="contact-bar-right">
-        <div class="contact-bar-label">Öppettider</div>
-        <div class="contact-bar-open">Alltid öppet</div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <div class="ticker">
-  <div class="ticker-track">
-    <span class="ticker-item">Husmålning<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Fasadmålning<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Innermålning<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Industrimålning<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Tapetsering<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Spackling<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Träskydd<span class="ticker-sep"></span></span>
-    <span class="ticker-item">ROT-avdrag<span class="ticker-sep"></span></span>
-    <!-- duplicate for seamless loop -->
-    <span class="ticker-item">Husmålning<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Fasadmålning<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Innermålning<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Industrimålning<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Tapetsering<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Spackling<span class="ticker-sep"></span></span>
-    <span class="ticker-item">Träskydd<span class="ticker-sep"></span></span>
-    <span class="ticker-item">ROT-avdrag<span class="ticker-sep"></span></span>
-  </div>
+    <div class="ticker-track">
+        <span class="ticker-item">Husmålning<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Fasadmålning<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Innermålning<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Industrimålning<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Tapetsering<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Fönsterrenovering<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Spackling<span class="ticker-sep"></span></span>
+        <span class="ticker-item">ROT-avdrag<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Husmålning<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Fasadmålning<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Innermålning<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Industrimålning<span class="ticker-sep"></span></span>
+    </div>
 </div>
 
-<!-- SERVICES -->
 <div class="services-section">
-  <div class="section-hdr">
-    <div>
-      <div class="label">Tjänster</div>
-      <h2 class="h-display">Vad vi utför</h2>
-    </div>
-    <a href="kontakt.html" class="btn-ghost">Begär offert</a>
-  </div>
-  <div class="grid-1px srv-grid">
-    <div class="srv-cell"><div class="srv-n">01</div><div class="srv-icon">🏠</div><div class="srv-title">Husmålning</div><p class="srv-desc">In- och utvändigt för villor, radhus och bostadsrätter med kvalitetsmaterial.</p></div>
-    <div class="srv-cell"><div class="srv-n">02</div><div class="srv-icon">🏢</div><div class="srv-title">Fasadmålning</div><p class="srv-desc">Fasadrenovering och målning för långvarig hållbarhet och snyggt resultat.</p></div>
-    <div class="srv-cell"><div class="srv-n">03</div><div class="srv-icon">🏭</div><div class="srv-title">Industrimålning</div><p class="srv-desc">Korrosionsskydd och specialbehandlingar för industri och kommersiella fastigheter.</p></div>
-    <div class="srv-cell"><div class="srv-n">04</div><div class="srv-icon">🖌️</div><div class="srv-title">Innermålning</div><p class="srv-desc">Spackling, grundning och slutstrykning. Precision och omsorg om varje detalj.</p></div>
-    <div class="srv-cell"><div class="srv-n">05</div><div class="srv-icon">🌿</div><div class="srv-title">Miljövänlig målning</div><p class="srv-desc">ISO 14001-certifierat. Alltid miljögodkända produkter och minimalt svinn.</p></div>
-    <div class="srv-cell"><div class="srv-n">06</div><div class="srv-icon">🏷️</div><div class="srv-title">ROT-avdrag</div><p class="srv-desc">Vi hanterar ROT-avdraget åt dig. Smidigt och maximalt utnyttjat.</p></div>
-  </div>
-</div>
-
-<!-- PROJECTS TEASER -->
-<div class="projects-teaser">
-  <div class="projects-teaser-inner">
     <div class="section-hdr">
-      <div>
-        <div class="label">Portfolio</div>
-        <h2 class="h-display">Utvalda projekt</h2>
-      </div>
-      <a href="projekt.html" class="btn-dark">Se alla projekt</a>
+        <div>
+            <div class="label">Våra Tjänster</div>
+            <h2 class="h-display">Vad vi utför</h2>
+        </div>
+        <a href="#" class="btn-ghost">Begär offert</a>
     </div>
-    <div class="grid-1px proj-thumb-row">
-      <div class="proj-thumb"><div class="proj-thumb-empty"><span>🖼</span><span>Bild kommer</span></div></div>
-      <div class="proj-thumb"><div class="proj-thumb-empty"><span>🖼</span><span>Bild kommer</span></div></div>
-      <div class="proj-thumb"><div class="proj-thumb-empty"><span>🖼</span><span>Bild kommer</span></div></div>
+    <div class="grid-1px srv-grid">
+        <div class="srv-cell"><div class="srv-n">01</div><div class="srv-icon">🏠</div><div class="srv-title">Husmålning</div><p class="srv-desc">In- och utvändigt för villor och radhus med noggrant underarbete.</p></div>
+        <div class="srv-cell"><div class="srv-n">02</div><div class="srv-icon">🏢</div><div class="srv-title">Fasadmålning</div><p class="srv-desc">Vi skyddar din fastighet mot väder och vind med hållbara färgsystem.</p></div>
+        <div class="srv-cell"><div class="srv-n">03</div><div class="srv-icon">🏭</div><div class="srv-title">Industrimålning</div><p class="srv-desc">Korrosionsskydd och specialmålning för tuffa miljöer.</p></div>
+        <div class="srv-cell"><div class="srv-n">04</div><div class="srv-icon">🖌️</div><div class="srv-title">Innermålning</div><p class="srv-desc">Spackling, grundning och finish för ett perfekt resultat i varje rum.</p></div>
+        <div class="srv-cell"><div class="srv-n">05</div><div class="srv-icon">🌿</div><div class="srv-title">Miljöfokus</div><p class="srv-desc">ISO 14001-certifierat arbete med svanenmärkta produkter.</p></div>
+        <div class="srv-cell"><div class="srv-n">06</div><div class="srv-icon">🏷️</div><div class="srv-title">ROT-avdrag</div><p class="srv-desc">Maximalt skatteavdrag direkt på din offert. Enkelt och smidigt.</p></div>
     </div>
-  </div>
 </div>
 
-<!-- REVIEWS -->
+<div class="projects-teaser">
+    <div class="projects-teaser-inner">
+        <div class="section-hdr">
+            <div>
+                <div class="label">Utvalda Projekt</div>
+                <h2 class="h-display">Våra Referenser</h2>
+            </div>
+            <a href="#" class="btn-dark">Se alla projekt</a>
+        </div>
+        <div class="grid-1px proj-thumb-row">
+            <div class="proj-thumb"><div class="proj-thumb-empty"><span>🖼</span><span>Referens Kommer</span></div></div>
+            <div class="proj-thumb"><div class="proj-thumb-empty"><span>🖼</span><span>Referens Kommer</span></div></div>
+            <div class="proj-thumb"><div class="proj-thumb-empty"><span>🖼</span><span>Referens Kommer</span></div></div>
+        </div>
+    </div>
+</div>
+
 <div class="reviews-section">
-  <div class="section-hdr">
-    <div>
-      <div class="label">Recensioner</div>
-      <h2 class="h-display">Vad kunderna säger</h2>
+    <div class="section-hdr">
+        <div>
+            <div class="label">Recensioner</div>
+            <h2 class="h-display">Kundröster</h2>
+        </div>
     </div>
-    <div style="text-align:right;">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:0.04em;line-height:1;">80%</div>
-      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);">Rekommenderar · 6 recensioner</div>
+    <div class="grid-1px reviews-grid">
+        <div class="review-cell">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-body">"Otroligt professionella. Allt från första kontakt till städning efteråt sköttes exemplariskt. Rekommenderas varmt!"</p>
+            <div class="review-author"><div class="review-av">A</div><div><div class="review-name">Anna L.</div><div class="review-src">Göteborg · Husmålning</div></div></div>
+        </div>
+        <div class="review-cell">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-body">"Snabbt, snyggt och till rätt pris. Fasadmålningen lyfte verkligen hela huset."</p>
+            <div class="review-author"><div class="review-av">M</div><div><div class="review-name">Mikael S.</div><div class="review-src">Mölndal · Fasadmålning</div></div></div>
+        </div>
     </div>
-  </div>
-  <div class="grid-1px reviews-grid">
-    <div class="review-cell">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-body">"Professionellt och noggrant arbete. De kom i tid, städade efter sig och resultatet var över förväntan."</p>
-      <div class="review-author"><div class="review-av">A</div><div><div class="review-name">Anna L.</div><div class="review-src">Google · Husmålning</div></div></div>
-    </div>
-    <div class="review-cell">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-body">"Snabbt, smidigt och ett fint slutresultat. Kommunikationen var tydlig hela vägen och priset rimligt."</p>
-      <div class="review-author"><div class="review-av">M</div><div><div class="review-name">Mikael S.</div><div class="review-src">Google · Fasadmålning</div></div></div>
-    </div>
-    <div class="review-cell">
-      <div class="review-stars">★★★★☆</div>
-      <p class="review-body">"Bra hantverkare som vet vad de gör. Fasadmålningen ser fantastisk ut och de höll sig inom budgeten."</p>
-      <div class="review-author"><div class="review-av">K</div><div><div class="review-name">Karin B.</div><div class="review-src">Google · Fasadmålning</div></div></div>
-    </div>
-    <div class="review-cell">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-body">"Anlitade dem för innermålning i hela huset. Noggranna, trevliga och levererade precis som utlovat."</p>
-      <div class="review-author"><div class="review-av">P</div><div><div class="review-name">Per H.</div><div class="review-src">Google · Innermålning</div></div></div>
-    </div>
-  </div>
 </div>
 
-<!-- CTA -->
 <div class="cta-strip">
-  <div class="cta-strip-inner">
-    <h2 class="h-display">Redo för ett fräscht resultat?</h2>
-    <a href="kontakt.html" class="btn-white">Begär offert</a>
-  </div>
+    <div class="cta-strip-inner">
+        <h2 class="h-display">Behöver du en målare du kan lita på?</h2>
+        <a href="#" class="btn-white">Få en kostnadsfri offert</a>
+    </div>
 </div>
 
 <footer>
-  <div class="footer-top">
-    <div>
-      <span class="footer-logo">Tingstad Måleri</span>
-      <p class="footer-tagline">Alla typer av måleriuppdrag i Göteborg. ISO-certifierade för kvalitet och miljö.</p>
+    <div class="footer-top">
+        <div>
+            <span class="footer-logo">Tingstad Måleri</span>
+            <p class="footer-tagline">Din partner för kvalitetsmåleri i Göteborg. ISO-certifierade hantverkare för stora och små projekt.</p>
+        </div>
+        <div class="footer-col">
+            <h5>Navigering</h5>
+            <a href="#">Hem</a>
+            <a href="#">Projekt</a>
+            <a href="#">Om oss</a>
+            <a href="#">Kontakt</a>
+        </div>
+        <div class="footer-col">
+            <h5>Tjänster</h5>
+            <span>Utvändig målning</span>
+            <span>Invändig målning</span>
+            <span>Industrimålning</span>
+            <span>Tapetsering</span>
+        </div>
+        <div class="footer-col">
+            <h5>Kontakt</h5>
+            <a href="tel:030212539">0302-125 39</a>
+            <span>Aröds Industriväg 68</span>
+            <span>417 05 Göteborg</span>
+        </div>
     </div>
-    <div class="footer-col">
-      <h5>Sidor</h5>
-      <a href="index.html">Hem</a>
-      <a href="projekt.html">Projekt</a>
-      <a href="om-oss.html">Om oss</a>
-      <a href="kontakt.html">Kontakt</a>
+    <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Tingstad Måleri AB</span>
+        <div class="footer-iso">
+            <span>ISO 9001</span>
+            <span>ISO 14001</span>
+        </div>
     </div>
-    <div class="footer-col">
-      <h5>Tjänster</h5>
-      <span>Husmålning</span>
-      <span>Fasadmålning</span>
-      <span>Industrimålning</span>
-      <span>ROT-avdrag</span>
-    </div>
-    <div class="footer-col">
-      <h5>Kontakt</h5>
-      <a href="tel:030212539">0302-125 39</a>
-      <span>Aröds Industriväg 68</span>
-      <span>Göteborg</span>
-      <a href="https://tingstadmaleri.se" target="_blank">tingstadmaleri.se</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Tingstad Måleri AB</span>
-    <div class="footer-iso"><span>ISO 9001</span><span>ISO 14001</span></div>
-  </div>
 </footer>
 
 </body>
