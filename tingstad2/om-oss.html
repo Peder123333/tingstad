@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Om oss – Tingstad Måleri AB</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.about-body {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 6rem 4rem;
+}
+
+.about-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8rem;
+  align-items: start;
+  padding-bottom: 6rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 6rem;
+}
+
+.about-intro-text p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 1.2rem;
+}
+
+.pullquote {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.5rem,2.5vw,2.2rem);
+  letter-spacing: 0.03em;
+  color: var(--black);
+  line-height: 1.2;
+  padding-left: 2rem;
+  border-left: 3px solid var(--black);
+  margin-bottom: 2.5rem;
+}
+
+.info-card {
+  background: var(--snow);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.info-card-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.info-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.info-key {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.info-val {
+  font-size: 0.85rem;
+  color: var(--dark);
+  text-align: right;
+}
+
+/* STATS ROW */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 6rem;
+}
+
+.stat-blk {
+  background: var(--black);
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+.stat-blk-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.stat-blk-l {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+/* VALUES */
+.values-grid {
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 6rem;
+}
+
+.val-cell {
+  background: var(--white);
+  padding: 3rem;
+  transition: background 0.2s;
+}
+
+.val-cell:hover { background: var(--snow); }
+
+.val-n {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+}
+
+.val-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  margin-bottom: 0.8rem;
+}
+
+.val-text {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* ISO */
+.iso-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.iso-cell {
+  background: var(--snow);
+  padding: 3.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+
+.iso-cell:hover { background: var(--light); }
+
+.iso-bg {
+  position: absolute;
+  top: 1rem; right: 1.5rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 7rem;
+  letter-spacing: -0.02em;
+  color: rgba(0,0,0,0.04);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.iso-lbl {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.7rem;
+}
+
+.iso-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.iso-text {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+@media (max-width:960px) {
+  .about-body { padding:4rem 1.5rem; }
+  .about-intro { grid-template-columns:1fr; gap:3rem; }
+  .stats-bar { grid-template-columns:1fr 1fr; }
+  .values-grid { grid-template-columns:1fr; }
+  .iso-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Tingstad Måleri</a>
+  <ul class="nav-menu">
+    <li><a href="index.html">Hem</a></li>
+    <li><a href="projekt.html">Projekt</a></li>
+    <li><a href="om-oss.html" class="active">Om oss</a></li>
+    <li><a href="kontakt.html" class="nav-btn">Kontakt</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="label au d1">Om oss</div>
+    <h1 class="h-display au d2">Hantverkare<br>du kan lita på.</h1>
+    <p class="au d3">Tingstad Måleri AB är ett etablerat måleriföretag i Göteborg med ISO-certifiering för kvalitet och miljö.</p>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-blk"><div class="stat-blk-n">ISO</div><div class="stat-blk-l">9001 & 14001</div></div>
+  <div class="stat-blk"><div class="stat-blk-n">80%</div><div class="stat-blk-l">Rekommenderar</div></div>
+  <div class="stat-blk"><div class="stat-blk-n">24/7</div><div class="stat-blk-l">Alltid öppet</div></div>
+  <div class="stat-blk"><div class="stat-blk-n">GBG</div><div class="stat-blk-l">Göteborg</div></div>
+</div>
+
+<div class="about-body">
+
+  <div class="about-intro">
+    <div class="about-intro-text">
+      <div class="label" style="margin-bottom:1.5rem;">Vår historia</div>
+      <p>Tingstad Måleri AB är ett etablerat måleriföretag baserat i Göteborg. Vi utför alla typer av måleriuppdrag – för privatpersoner, bostadsrättsföreningar och företag i hela Göteborgsregionen.</p>
+      <p>Med ett team av licensierade målare levererar vi alltid resultat vi kan vara stolta över. Vi tror på ärlighet, transparens och hantverk av högsta klass.</p>
+      <p>Oavsett om det handlar om ett litet rum eller en hel industrifastighet hanterar vi varje uppdrag med samma noggrannhet och respekt för kundens hem.</p>
+      <div style="margin-top:2rem;">
+        <a href="kontakt.html" class="btn-dark">Kontakta oss</a>
+      </div>
+    </div>
+    <div>
+      <div class="pullquote">"Vi levererar alltid med hög kvalitet, rätt kompetens och respekt för miljö och kund."</div>
+      <div class="info-card">
+        <div class="info-card-row">
+          <div class="info-row"><span class="info-key">Telefon</span><span class="info-val">0302-125 39</span></div>
+          <div class="info-row"><span class="info-key">Adress</span><span class="info-val">Aröds Industriväg 68, Göteborg</span></div>
+          <div class="info-row"><span class="info-key">Webb</span><span class="info-val">tingstadmaleri.se</span></div>
+          <div class="info-row"><span class="info-key">Öppettider</span><span class="info-val">Alltid öppet</span></div>
+          <div class="info-row"><span class="info-key">Certifiering</span><span class="info-val">ISO 9001 & 14001</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="label" style="margin-bottom:1.5rem;">Våra värderingar</div>
+  <div class="grid-1px values-grid" style="margin-bottom:6rem;">
+    <div class="val-cell"><div class="val-n">01</div><div class="val-title">Kvalitet i varje drag</div><p class="val-text">ISO 9001 säkerställer att varje uppdrag utförs rätt – från offert till besiktning. Det är inte ett certifikat, det är ett löfte.</p></div>
+    <div class="val-cell"><div class="val-n">02</div><div class="val-title">Miljöansvar som standard</div><p class="val-text">Med ISO 14001-certifiering väljer vi alltid miljögodkända produkter och arbetar för att minimera vår påverkan på varje arbetsplats.</p></div>
+    <div class="val-cell"><div class="val-n">03</div><div class="val-title">Ärlighet och transparens</div><p class="val-text">Vi ger tydliga offerter utan dolda kostnader. Priset vi säger är priset du betalar. Punktlighet är en självklarhet, inte en bonus.</p></div>
+    <div class="val-cell"><div class="val-n">04</div><div class="val-title">Alltid tillgängliga</div><p class="val-text">Vi finns tillgängliga dygnet runt för frågor och akuta behov. Din trygghet är vår prioritet oavsett tid på dygnet.</p></div>
+  </div>
+
+  <div class="label" style="margin-bottom:1.5rem;">Certifieringar</div>
+  <div class="grid-1px iso-grid">
+    <div class="iso-cell">
+      <div class="iso-bg">9001</div>
+      <div class="iso-lbl">ISO 9001</div>
+      <div class="iso-title">Kvalitetsledning</div>
+      <p class="iso-text">ISO 9001 är den internationella standarden för kvalitetsledningssystem. Det innebär att vi systematiskt arbetar för att förbättra processer, uppfylla kundkrav och leverera konsekvent hög kvalitet.</p>
+    </div>
+    <div class="iso-cell">
+      <div class="iso-bg">14001</div>
+      <div class="iso-lbl">ISO 14001</div>
+      <div class="iso-title">Miljöledning</div>
+      <p class="iso-text">ISO 14001 visar att vi tar miljöansvaret på allvar. Vi identifierar och minimerar vår miljöpåverkan, väljer hållbara produkter och arbetar ständigt för att minska svinn och utsläpp.</p>
+    </div>
+  </div>
+
+</div>
+
+<div style="background:var(--black);padding:5rem 4rem;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:3rem;flex-wrap:wrap;">
+    <h2 class="h-display" style="font-size:clamp(2.5rem,4vw,4rem);color:var(--white);">Redo att starta ditt projekt?</h2>
+    <a href="kontakt.html" class="btn-white">Begär offert</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-logo">Tingstad Måleri</span>
+      <p class="footer-tagline">Alla typer av måleriuppdrag i Göteborg. ISO-certifierade för kvalitet och miljö.</p>
+    </div>
+    <div class="footer-col"><h5>Sidor</h5><a href="index.html">Hem</a><a href="projekt.html">Projekt</a><a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a></div>
+    <div class="footer-col"><h5>Tjänster</h5><span>Husmålning</span><span>Fasadmålning</span><span>Industrimålning</span><span>ROT-avdrag</span></div>
+    <div class="footer-col"><h5>Kontakt</h5><a href="tel:030212539">0302-125 39</a><span>Aröds Industriväg 68</span><span>Göteborg</span><a href="https://tingstadmaleri.se" target="_blank">tingstadmaleri.se</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Tingstad Måleri AB</span>
+    <div class="footer-iso"><span>ISO 9001</span><span>ISO 14001</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

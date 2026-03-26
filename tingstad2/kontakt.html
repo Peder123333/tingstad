@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt – Tingstad Måleri AB</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.contact-wrap {
+  padding-top: 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 64px);
+}
+
+/* LEFT */
+.contact-info-col {
+  background: var(--black);
+  padding: 6rem 5rem 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-info-col .label { color: rgba(255,255,255,0.3); }
+.contact-info-col .label::before { background: rgba(255,255,255,0.2); }
+
+.contact-info-col h2 {
+  font-size: clamp(3rem,5vw,5.5rem);
+  color: var(--white);
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+}
+
+.ci-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.ci-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.ci-row:first-child { padding-top: 0; }
+.ci-row:last-child  { border-bottom: none; }
+
+.ci-icon {
+  width: 38px; height: 38px;
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.ci-lbl {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 0.3rem;
+}
+
+.ci-val {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+
+.ci-val a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.ci-val a:hover { color: var(--white); }
+
+.ci-bottom {
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin-top: 3rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.ci-iso {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.3rem 0.8rem;
+}
+
+/* RIGHT */
+.contact-form-col {
+  background: var(--snow);
+  padding: 6rem 4rem 5rem 5rem;
+  border-left: 1px solid var(--border);
+}
+
+.form-head { margin-bottom: 2.5rem; }
+
+.form-head h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  margin-top: 0.5rem;
+}
+
+.form-head p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+
+.cform {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cform-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.fg {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.fg label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fg input,
+.fg select,
+.fg textarea {
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--black);
+  padding: 0.85rem 1rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: none;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.fg input::placeholder,
+.fg textarea::placeholder {
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.fg select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23999896' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-color: var(--white);
+  padding-right: 2.5rem;
+}
+
+.fg input:focus,
+.fg select:focus,
+.fg textarea:focus { border-color: var(--black); }
+
+.submit-btn {
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  padding: 1rem 2.4rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.submit-btn:hover { background: var(--dark); transform: translateY(-1px); }
+
+.form-ok {
+  display: none;
+  background: var(--light);
+  border: 1px solid var(--border);
+  padding: 1rem 1.4rem;
+  font-size: 0.85rem;
+  color: var(--dark);
+  margin-bottom: 1.5rem;
+}
+
+/* MAP */
+.map-wrap {
+  height: 440px;
+  background: var(--light);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+
+.map-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  filter: grayscale(15%);
+}
+
+.map-pin {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 1.4rem 1.8rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+.map-pin-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  margin-bottom: 0.25rem;
+}
+
+.map-pin-addr {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.map-pin-link {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dark);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1px;
+  transition: border-color 0.2s;
+}
+
+.map-pin-link:hover { border-color: var(--black); }
+
+@media (max-width:960px) {
+  .contact-wrap { grid-template-columns:1fr; }
+  .contact-info-col { padding:4rem 1.5rem; }
+  .contact-form-col { padding:4rem 1.5rem; border-left:none; border-top:1px solid var(--border); }
+  .cform-row { grid-template-columns:1fr; }
+  .map-wrap { height:320px; }
+  .map-pin { top:1rem; right:1rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Tingstad Måleri</a>
+  <ul class="nav-menu">
+    <li><a href="index.html">Hem</a></li>
+    <li><a href="projekt.html">Projekt</a></li>
+    <li><a href="om-oss.html">Om oss</a></li>
+    <li><a href="kontakt.html" class="nav-btn active">Kontakt</a></li>
+  </ul>
+</nav>
+
+<div class="contact-wrap">
+  <div class="contact-info-col">
+    <div class="label au d1">Kontakt</div>
+    <h2 class="h-display au d2">Hör av<br>dig.</h2>
+    <div class="ci-list au d3">
+      <div class="ci-row">
+        <div class="ci-icon">📞</div>
+        <div><div class="ci-lbl">Telefon</div><div class="ci-val"><a href="tel:030212539">0302-125 39</a></div></div>
+      </div>
+      <div class="ci-row">
+        <div class="ci-icon">📍</div>
+        <div><div class="ci-lbl">Adress</div><div class="ci-val">Aröds Industriväg 68<br>Göteborg, Sverige</div></div>
+      </div>
+      <div class="ci-row">
+        <div class="ci-icon">🌐</div>
+        <div><div class="ci-lbl">Webb</div><div class="ci-val"><a href="https://tingstadmaleri.se" target="_blank">tingstadmaleri.se</a></div></div>
+      </div>
+      <div class="ci-row">
+        <div class="ci-icon">🕐</div>
+        <div><div class="ci-lbl">Öppettider</div><div class="ci-val">Alltid öppet</div></div>
+      </div>
+    </div>
+    <div class="ci-bottom au d4">
+      <span class="ci-iso">ISO 9001</span>
+      <span class="ci-iso">ISO 14001</span>
+    </div>
+  </div>
+
+  <div class="contact-form-col">
+    <div class="form-head au d1">
+      <div class="label">Offertförfrågan</div>
+      <h3>Begär offert</h3>
+      <p>Vi återkommer med en kostnadsfri offert inom 24 timmar.</p>
+    </div>
+    <div id="formOk" class="form-ok">✓ Tack! Vi återkommer med en offert inom kort.</div>
+    <div class="cform au d2" id="cform">
+      <div class="cform-row">
+        <div class="fg"><label>Förnamn *</label><input type="text" id="fname" placeholder="Anna"></div>
+        <div class="fg"><label>Efternamn</label><input type="text" placeholder="Andersson"></div>
+      </div>
+      <div class="fg"><label>E-post *</label><input type="email" id="femail" placeholder="anna@exempel.se"></div>
+      <div class="fg"><label>Telefon</label><input type="tel" placeholder="070-000 00 00"></div>
+      <div class="fg">
+        <label>Typ av uppdrag</label>
+        <select>
+          <option value="">Välj typ...</option>
+          <option>Husmålning – invändigt</option>
+          <option>Husmålning – utvändigt</option>
+          <option>Fasadmålning</option>
+          <option>Industrimålning</option>
+          <option>ROT-arbete</option>
+          <option>Tapetsering</option>
+          <option>Övrigt</option>
+        </select>
+      </div>
+      <div class="fg"><label>Beskriv uppdraget</label><textarea rows="4" placeholder="Typ av yta, ungefärlig storlek, önskad tidsram..."></textarea></div>
+      <button class="submit-btn" onclick="sendForm()">Skicka förfrågan →</button>
+    </div>
+  </div>
+</div>
+
+<!-- GOOGLE MAPS -->
+<div class="map-wrap">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2134.5947!2d11.8963!3d57.7389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff3abf0000001%3A0x1!2sAr%C3%B6ds%20Industriv%C3%A4g%2068%2C%20418%2034%20G%C3%B6teborg!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Tingstad Måleri – Aröds Industriväg 68 Göteborg">
+  </iframe>
+  <div class="map-pin">
+    <div class="map-pin-name">Tingstad Måleri AB</div>
+    <div class="map-pin-addr">Aröds Industriväg 68<br>Göteborg · 0302-125 39</div>
+    <a class="map-pin-link" href="https://maps.google.com/?q=Aröds+Industriväg+68+Göteborg" target="_blank">Öppna i Google Maps ↗</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-logo">Tingstad Måleri</span>
+      <p class="footer-tagline">Alla typer av måleriuppdrag i Göteborg. ISO-certifierade för kvalitet och miljö.</p>
+    </div>
+    <div class="footer-col"><h5>Sidor</h5><a href="index.html">Hem</a><a href="projekt.html">Projekt</a><a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a></div>
+    <div class="footer-col"><h5>Tjänster</h5><span>Husmålning</span><span>Fasadmålning</span><span>Industrimålning</span><span>ROT-avdrag</span></div>
+    <div class="footer-col"><h5>Kontakt</h5><a href="tel:030212539">0302-125 39</a><span>Aröds Industriväg 68</span><span>Göteborg</span><a href="https://tingstadmaleri.se" target="_blank">tingstadmaleri.se</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Tingstad Måleri AB</span>
+    <div class="footer-iso"><span>ISO 9001</span><span>ISO 14001</span></div>
+  </div>
+</footer>
+
+<script>
+function sendForm() {
+  const n = document.getElementById('fname').value;
+  const e = document.getElementById('femail').value;
+  if (!n || !e) { alert('Fyll i namn och e-post.'); return; }
+  document.getElementById('cform').style.display = 'none';
+  document.getElementById('formOk').style.display = 'block';
+}
+</script>
+</body>
+</html>
