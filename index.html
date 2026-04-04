@@ -3,481 +3,619 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tingstad Måleri</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;700&display=swap" rel="stylesheet" />
+  <title>Tingstad Måleri – Göteborg</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --cream: #f5efe6;
-      --cream-dark: #ede4d8;
-      --brown: #7a5c3e;
+      --cream:       #f6f0e8;
+      --cream-dark:  #ede5d8;
+      --cream-mid:   #e5dace;
+      --warm-white:  #faf7f3;
+      --brown:       #6b4e35;
       --brown-light: #c49a72;
-      --text-dark: #3a3128;
-      --text-mid: #6b5c4e;
-      --text-light: #9e8e7e;
-      --white: #ffffff;
-      --black: #1a1410;
-      --accent: #b07840;
+      --brown-mid:   #9a6d47;
+      --gold:        #c08c4a;
+      --gold-light:  #e8c07a;
+      --text-dark:   #2c231b;
+      --text-mid:    #6b5c4e;
+      --text-light:  #9e8e7e;
+      --black:       #18120c;
+      --black-soft:  #231a12;
+      --white:       #ffffff;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; overflow: hidden; }
+    body { font-family: 'Barlow', sans-serif; background: var(--cream); color: var(--text-dark); }
 
-    body {
-      font-family: 'Barlow', sans-serif;
-      background: var(--cream);
-      color: var(--text-dark);
-    }
-
-    /* ─── PAGE SYSTEM ─── */
-    #app {
-      width: 100%;
-      height: 100vh;
-      position: relative;
-      overflow: hidden;
-    }
+    /* ═══════════════════════════════ PAGE SYSTEM ═══════════════════════════════ */
+    #app { width: 100%; height: 100vh; position: relative; overflow: hidden; }
 
     .page {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100vh;
-      overflow-y: auto;
-      overflow-x: hidden;
-      opacity: 0;
-      transform: translateX(60px);
+      position: absolute; inset: 0; width: 100%; height: 100vh;
+      overflow-y: auto; overflow-x: hidden;
+      opacity: 0; transform: translateX(70px);
       pointer-events: none;
-      transition: opacity 0.45s ease, transform 0.45s ease;
+      transition: opacity 0.5s cubic-bezier(.4,0,.2,1), transform 0.5s cubic-bezier(.4,0,.2,1);
       background: var(--cream);
     }
-    .page.active {
-      opacity: 1;
-      transform: translateX(0);
-      pointer-events: all;
-    }
-    .page.out-left {
-      opacity: 0;
-      transform: translateX(-60px);
-      pointer-events: none;
-    }
+    .page.active  { opacity: 1; transform: translateX(0); pointer-events: all; }
+    .page.out-left{ opacity: 0; transform: translateX(-70px); pointer-events: none; }
 
-    /* ─── NAV ─── */
+    /* ═══════════════════════════════ NAVIGATION ═══════════════════════════════ */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      padding: 20px 50px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: background 0.4s, box-shadow 0.4s;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      padding: 0 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 80px;
+      transition: background 0.4s, box-shadow 0.4s, height 0.4s;
     }
     nav.solid {
-      background: var(--cream);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      background: rgba(246,240,232,0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.06);
+      height: 68px;
     }
+
     .logo-btn {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 1.6rem;
-      letter-spacing: 0.15em;
-      color: var(--white);
-      text-decoration: none;
-      line-height: 1;
-      transition: color 0.4s;
-      cursor: pointer;
-      border: none;
-      background: none;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 1.55rem; letter-spacing: 0.18em;
+      color: var(--white); background: none; border: none; cursor: pointer;
+      line-height: 1; transition: color 0.4s; text-align: left;
+      display: flex; flex-direction: column; gap: 3px;
     }
     nav.solid .logo-btn { color: var(--text-dark); }
-    .logo-btn span {
-      display: block;
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      font-weight: 500;
-      margin-top: 2px;
+    .logo-btn .logo-sub {
+      font-size: 0.58rem; letter-spacing: 0.38em; font-weight: 500;
+      color: var(--brown-light); display: block;
     }
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav-links button {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 500;
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: rgba(255,255,255,0.85);
-      transition: color 0.3s;
-      position: relative;
-      padding: 0;
-    }
-    .nav-links button::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0; right: 0;
-      height: 1px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-    }
-    .nav-links button:hover::after,
-    .nav-links button.active::after { transform: scaleX(1); }
-    nav.solid .nav-links button { color: var(--text-mid); }
-    nav.solid .nav-links button:hover,
-    nav.solid .nav-links button.active { color: var(--accent); }
+    nav.solid .logo-btn .logo-sub { color: var(--gold); }
 
-    /* ─── SHARED TYPOGRAPHY ─── */
+    .nav-links { display: flex; gap: 8px; list-style: none; align-items: center; }
+    .nav-links button {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase;
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.8); padding: 8px 14px; border-radius: 4px;
+      transition: color 0.3s, background 0.3s;
+    }
+    .nav-links button:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+    .nav-links button.active { color: var(--gold-light); }
+    nav.solid .nav-links button { color: var(--text-mid); }
+    nav.solid .nav-links button:hover { color: var(--text-dark); background: rgba(0,0,0,0.05); }
+    nav.solid .nav-links button.active { color: var(--gold); }
+
+    .nav-cta {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      background: var(--gold); color: var(--white) !important;
+      border: none; cursor: pointer; padding: 11px 22px !important;
+      border-radius: 50px; transition: background 0.3s, transform 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--brown) !important; transform: translateY(-1px) !important; }
+
+    /* ═══════════════════════════════ SHARED ═══════════════════════════════ */
     .section-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.4em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      display: block;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem;
+      letter-spacing: 0.45em; color: var(--gold); text-transform: uppercase;
+      margin-bottom: 10px; display: block;
     }
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 700;
-      color: var(--text-dark);
-      line-height: 1.15;
-      margin-bottom: 18px;
+      font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: clamp(1.9rem, 3.2vw, 2.7rem); color: var(--text-dark);
+      line-height: 1.15; margin-bottom: 20px;
     }
     .section-title.center { text-align: center; }
     .section-sub {
-      font-size: 1rem;
-      font-weight: 300;
-      color: var(--text-mid);
-      line-height: 1.7;
-      max-width: 680px;
+      font-size: 1rem; font-weight: 300; color: var(--text-mid);
+      line-height: 1.8; max-width: 660px;
     }
     .section-sub.center { text-align: center; margin: 0 auto; }
 
-    /* ─── PAGE INNER WRAPPER ─── */
-    .page-inner {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 110px 50px 60px;
+    .page-inner { max-width: 1240px; margin: 0 auto; padding: 110px 56px 80px; }
+    .page-inner.narrow { max-width: 1000px; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold); color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 0.82rem; letter-spacing: 0.25em; text-transform: uppercase;
+      padding: 16px 40px; border-radius: 50px; border: none;
+      cursor: pointer; transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+    .btn-primary:hover {
+      background: var(--brown); transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(176,120,64,0.4);
+    }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; color: var(--text-dark);
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 0.82rem; letter-spacing: 0.25em; text-transform: uppercase;
+      padding: 15px 38px; border-radius: 50px; border: 2px solid var(--text-dark);
+      cursor: pointer; transition: all 0.3s;
+    }
+    .btn-outline:hover {
+      background: var(--text-dark); color: var(--white); transform: translateY(-2px);
     }
 
-    /* ══════════ PAGE: HEM ══════════ */
-    #page-hem {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ═══════════════════════════════ PAGE: HEM ═══════════════════════════════ */
+    #page-hem { overflow: hidden !important; }
+
     .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(20,15,10,0.6) 0%, rgba(20,15,10,0.3) 50%, rgba(20,15,10,0.7) 100%), var(--cream-dark);
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #2c1e12 0%, #1a1008 100%);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-size: cover;
-      background-position: center;
+    }
+    .hero-bg-img {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity 1s ease;
+    }
+    .hero-bg-img.loaded { opacity: 1; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.1) 40%,
+        rgba(0,0,0,0.7) 100%);
+    }
+    .hero-grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     }
     .hero-upload-hint {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      color: rgba(255,255,255,0.3);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      pointer-events: none;
-      text-align: center;
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      color: rgba(255,255,255,0.18); pointer-events: none; z-index: 1;
     }
-    .hero-upload-hint svg { width: 40px; opacity: 0.35; }
+    .hero-upload-hint svg { width: 36px; }
+    .hero-upload-hint span {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem;
+      letter-spacing: 0.3em; text-transform: uppercase;
+    }
     .hero-bg.has-image .hero-upload-hint { display: none; }
+
     .hero-content {
-      position: relative;
-      text-align: center;
-      color: var(--white);
-      z-index: 1;
-      animation: fadeUp 1s ease both;
+      position: relative; z-index: 10; text-align: center; color: var(--white);
+      animation: heroIn 1.1s cubic-bezier(.4,0,.2,1) both;
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(40px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+
     .hero-eyebrow {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.4em;
-      color: var(--brown-light);
-      margin-bottom: 16px;
-    }
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.5rem, 8vw, 7rem);
-      font-weight: 900;
-      line-height: 1.05;
-      margin-bottom: 20px;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.4);
-    }
-    .hero-sub {
-      font-size: 1.05rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      opacity: 0.85;
-      margin-bottom: 44px;
-    }
-    .btn-primary {
-      display: inline-block;
-      background: var(--accent);
-      color: var(--white);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.25em;
-      padding: 16px 44px;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 14px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem;
+      letter-spacing: 0.45em; color: var(--gold-light); margin-bottom: 22px;
       text-transform: uppercase;
     }
-    .btn-primary:hover { background: var(--brown); transform: translateY(-2px); }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: ''; display: block; width: 40px; height: 1px;
+      background: var(--gold-light); opacity: 0.6;
+    }
 
-    /* ══════════ PAGE: OM OSS ══════════ */
+    .hero-title {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(3.8rem, 9vw, 7.5rem);
+      line-height: 1.0; margin-bottom: 24px;
+      text-shadow: 0 4px 60px rgba(0,0,0,0.3);
+    }
+    .hero-title em {
+      font-style: italic; color: var(--gold-light);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem; font-weight: 300; letter-spacing: 0.06em;
+      opacity: 0.8; margin-bottom: 50px; line-height: 1.6;
+    }
+
+    .hero-actions { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
+
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 10;
+      color: rgba(255,255,255,0.4);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      animation: scrollBounce 2s ease infinite;
+      cursor: pointer; border: none; background: none;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+    .hero-scroll svg { width: 20px; opacity: 0.5; }
+
+    .hero-strip {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+      display: flex; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-strip-item {
+      flex: 1; padding: 20px 30px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(8px);
+    }
+    .hero-strip-item:last-child { border-right: none; }
+    .hero-strip-num {
+      font-family: 'Playfair Display', serif; font-size: 1.8rem;
+      font-weight: 700; color: var(--gold-light); line-height: 1;
+    }
+    .hero-strip-label { font-size: 0.75rem; color: rgba(255,255,255,0.55); line-height: 1.4; }
+    .hero-strip-label strong { display: block; color: rgba(255,255,255,0.85); font-weight: 500; font-size: 0.82rem; }
+
+    /* ═══════════════════════════════ PAGE: OM OSS ═══════════════════════════════ */
     .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      margin-top: 50px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 90px; align-items: center; margin-top: 60px;
     }
-    .about-img-wrap {
-      position: relative;
-      cursor: pointer;
+    .about-img-wrap { position: relative; cursor: pointer; }
+    .about-img-wrap::after {
+      content: ''; position: absolute;
+      inset: 18px -18px -18px 18px;
+      border: 1.5px solid var(--brown-light);
+      z-index: 0; pointer-events: none;
     }
-    .about-img-wrap::before {
-      content: '';
-      position: absolute;
-      inset: -14px -14px 14px 14px;
-      border: 2px solid var(--brown-light);
-      z-index: 0;
+    .about-img-inner {
+      position: relative; z-index: 1; width: 100%; height: 500px; overflow: hidden;
     }
     .img-placeholder {
-      position: relative; z-index: 1;
-      width: 100%; height: 480px;
-      background: var(--cream-dark);
-      border: 2px dashed var(--brown-light);
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-      color: var(--text-light);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase;
-      transition: background 0.3s, border-color 0.3s, color 0.3s;
-    }
-    .img-placeholder:hover { background: #e8ddd0; border-color: var(--accent); color: var(--accent); }
-    .img-placeholder svg { opacity: 0.4; }
-    .about-img-wrap img {
-      display: none; width: 100%; height: 480px; object-fit: cover;
-      position: relative; z-index: 1;
-    }
-    .stats-row {
-      display: flex; gap: 40px;
-      margin-top: 40px; padding-top: 40px;
-      border-top: 1px solid var(--cream-dark);
-    }
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem; font-weight: 700; color: var(--accent); line-height: 1;
-    }
-    .stat-label { font-size: 0.8rem; letter-spacing: 0.1em; color: var(--text-light); margin-top: 4px; }
-
-    /* ══════════ PAGE: TJÄNSTER ══════════ */
-    #page-tjanster { background: var(--cream-dark); }
-    .services-head { text-align: center; margin-bottom: 50px; }
-    .services-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
-    }
-    .service-card {
-      background: var(--cream); padding: 40px 30px;
-      position: relative; overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
-    .service-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: var(--accent);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.4s;
-    }
-    .service-card:hover::before { transform: scaleX(1); }
-    .service-icon { font-size: 2rem; margin-bottom: 18px; }
-    .service-name {
-      font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700;
-      letter-spacing: 0.15em; color: var(--text-dark); text-transform: uppercase; margin-bottom: 12px;
-    }
-    .service-desc { font-size: 0.9rem; font-weight: 300; color: var(--text-mid); line-height: 1.65; }
-
-    .guarantees-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 60px; }
-    .guarantee-card {
-      background: var(--cream); padding: 40px 34px;
-      display: flex; gap: 22px; align-items: flex-start;
-    }
-    .guarantee-num {
-      font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900;
-      color: var(--accent); opacity: 0.25; line-height: 1; flex-shrink: 0;
-    }
-    .guarantee-title {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.95rem;
-      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dark); margin-bottom: 8px;
-    }
-    .guarantee-desc { font-size: 0.88rem; font-weight: 300; color: var(--text-mid); line-height: 1.7; }
-
-    .cert-strip {
-      background: var(--cream); padding: 40px; text-align: center; margin-top: 60px;
-    }
-    .cert-strip-title {
-      font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.4em;
-      color: var(--text-light); text-transform: uppercase; margin-bottom: 24px;
-    }
-    .cert-logos { display: flex; justify-content: center; align-items: center; gap: 50px; flex-wrap: wrap; }
-    .cert-item {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem;
-      letter-spacing: 0.12em; color: var(--text-mid);
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-    }
-    .cert-badge {
-      width: 50px; height: 50px; border-radius: 50%;
-      background: var(--accent); display: flex; align-items: center; justify-content: center;
-      color: white; font-size: 1.3rem;
-    }
-
-    /* ══════════ PAGE: REFERENSER ══════════ */
-    .references-head { text-align: center; margin-bottom: 50px; }
-    .references-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .ref-card { position: relative; overflow: hidden; cursor: pointer; }
-    .ref-img-wrap { position: relative; overflow: hidden; height: 260px; }
-    .ref-img-wrap img {
-      width: 100%; height: 260px; object-fit: cover; display: none; transition: transform 0.6s;
-    }
-    .ref-card:hover .ref-img-wrap img { transform: scale(1.06); }
-    .ref-placeholder {
-      width: 100%; height: 260px;
-      background: var(--cream-dark);
-      border: 2px dashed var(--brown-light);
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-      color: var(--text-light);
-      font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+      width: 100%; height: 100%;
+      background: var(--cream-dark); border: 2px dashed rgba(122,92,62,0.3);
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 12px; color: var(--text-light);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
       transition: background 0.3s, color 0.3s;
     }
-    .ref-placeholder:hover { background: #e8ddd0; color: var(--accent); }
-    .ref-placeholder svg { opacity: 0.4; }
-    .ref-overlay { background: var(--cream-dark); padding: 18px 20px; }
+    .img-placeholder:hover { background: #e2d8cc; color: var(--gold); }
+    .img-placeholder svg { opacity: 0.35; width: 40px; }
+    .about-img-inner img { display: none; width: 100%; height: 100%; object-fit: cover; }
+
+    .badge-floating {
+      position: absolute; bottom: -28px; right: -28px; z-index: 2;
+      width: 110px; height: 110px;
+      background: var(--gold); border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--white); text-align: center;
+      box-shadow: 0 12px 40px rgba(192,140,74,0.4);
+    }
+    .badge-floating-num {
+      font-family: 'Playfair Display', serif; font-size: 1.8rem;
+      font-weight: 900; line-height: 1;
+    }
+    .badge-floating-label { font-size: 0.6rem; letter-spacing: 0.12em; opacity: 0.9; margin-top: 2px; }
+
+    .about-text { padding-left: 10px; }
+    .about-lead {
+      font-size: 1.12rem; font-weight: 300; color: var(--text-mid);
+      line-height: 1.85; margin-bottom: 28px;
+    }
+    .about-body {
+      font-size: 0.93rem; font-weight: 300; color: var(--text-mid);
+      line-height: 1.8; margin-bottom: 36px;
+    }
+
+    .stats-row { display: flex; gap: 0; margin-top: 40px; }
+    .stat-item {
+      flex: 1; padding: 24px 24px 24px 0;
+      border-left: 2px solid var(--cream-dark);
+      padding-left: 24px;
+    }
+    .stat-item:first-child { padding-left: 0; border-left: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif; font-size: 2.4rem;
+      font-weight: 700; color: var(--gold); line-height: 1;
+    }
+    .stat-label { font-size: 0.78rem; color: var(--text-light); letter-spacing: 0.06em; margin-top: 4px; }
+
+    /* Values strip */
+    .values-strip {
+      background: var(--black-soft); margin-top: 80px;
+      padding: 60px 56px;
+    }
+    .values-strip-inner { max-width: 1240px; margin: 0 auto; }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); }
+    .value-item {
+      padding: 50px 44px; background: var(--black-soft);
+      transition: background 0.3s;
+    }
+    .value-item:hover { background: #2c1f14; }
+    .value-icon { font-size: 2rem; margin-bottom: 18px; }
+    .value-title {
+      font-family: 'Playfair Display', serif; font-size: 1.2rem;
+      color: var(--white); margin-bottom: 12px; font-weight: 700;
+    }
+    .value-desc { font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.75; }
+
+    /* ═══════════════════════════════ PAGE: TJÄNSTER ═══════════════════════════════ */
+    #page-tjanster { background: var(--warm-white); }
+
+    .services-hero {
+      background: var(--black-soft); padding: 80px 56px 70px;
+      text-align: center;
+    }
+    .services-hero .section-title { color: var(--white); }
+    .services-hero .section-sub { color: rgba(255,255,255,0.55); }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 0;
+      background: var(--cream-mid);
+    }
+    .service-card {
+      background: var(--warm-white); padding: 48px 34px;
+      border-right: 1px solid var(--cream-mid);
+      position: relative; overflow: hidden;
+      transition: background 0.35s, transform 0.35s;
+      cursor: default;
+    }
+    .service-card:last-child { border-right: none; }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--brown-light));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+    }
+    .service-card:hover { background: var(--cream); transform: translateY(-4px); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-num {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem;
+      letter-spacing: 0.35em; color: var(--gold); margin-bottom: 20px; display: block;
+    }
+    .service-icon { font-size: 2.2rem; margin-bottom: 16px; }
+    .service-name {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem;
+      letter-spacing: 0.12em; color: var(--text-dark); text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .service-desc { font-size: 0.88rem; font-weight: 300; color: var(--text-mid); line-height: 1.7; }
+
+    .guarantees-section { padding: 80px 56px; background: var(--cream); }
+    .guarantees-inner { max-width: 1240px; margin: 0 auto; }
+    .guarantees-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--cream-mid); margin-top: 50px; }
+    .guarantee-card {
+      background: var(--warm-white); padding: 44px 40px;
+      display: flex; gap: 24px; align-items: flex-start;
+      transition: background 0.3s;
+    }
+    .guarantee-card:hover { background: var(--cream-dark); }
+    .guarantee-num {
+      font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900;
+      color: var(--gold); opacity: 0.18; line-height: 1; flex-shrink: 0;
+    }
+    .guarantee-title {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.93rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dark); margin-bottom: 8px;
+    }
+    .guarantee-desc { font-size: 0.87rem; font-weight: 300; color: var(--text-mid); line-height: 1.75; }
+
+    .cert-strip { background: var(--black-soft); padding: 50px 56px; }
+    .cert-strip-inner { max-width: 1240px; margin: 0 auto; text-align: center; }
+    .cert-title { font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem; letter-spacing: 0.4em; color: rgba(255,255,255,0.3); text-transform: uppercase; margin-bottom: 34px; }
+    .cert-logos { display: flex; justify-content: center; align-items: center; gap: 56px; flex-wrap: wrap; }
+    .cert-item {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 0.78rem;
+      letter-spacing: 0.15em; color: rgba(255,255,255,0.45);
+      transition: color 0.3s;
+    }
+    .cert-item:hover { color: var(--gold-light); }
+    .cert-badge {
+      width: 54px; height: 54px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .cert-item:hover .cert-badge { border-color: var(--gold); background: rgba(192,140,74,0.1); }
+
+    /* ═══════════════════════════════ PAGE: REFERENSER ═══════════════════════════════ */
+    .references-head { text-align: center; margin-bottom: 56px; }
+    .references-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--cream-mid); }
+    .ref-card { position: relative; overflow: hidden; cursor: pointer; background: var(--warm-white); }
+    .ref-img-wrap { position: relative; overflow: hidden; height: 280px; }
+    .ref-img-wrap img {
+      width: 100%; height: 280px; object-fit: cover; display: none;
+      transition: transform 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .ref-card:hover .ref-img-wrap img { transform: scale(1.08); }
+    .ref-placeholder {
+      width: 100%; height: 280px;
+      background: var(--cream-dark);
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 10px; color: var(--text-light);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+      border: none;
+    }
+    .ref-placeholder:hover { background: #ddd4c4; color: var(--gold); }
+    .ref-placeholder svg { opacity: 0.35; width: 32px; }
+    .ref-overlay {
+      background: var(--warm-white); padding: 22px 24px 24px;
+      transition: background 0.3s;
+    }
+    .ref-card:hover .ref-overlay { background: var(--cream); }
+    .ref-tag {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem;
+      letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 5px;
+    }
     .ref-name {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.9rem;
-      letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dark); margin-bottom: 4px;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dark); margin-bottom: 3px;
     }
     .ref-desc { font-size: 0.82rem; color: var(--text-light); font-weight: 300; }
 
-    /* ══════════ PAGE: KONTAKT ══════════ */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .contact-info p {
-      font-size: 0.95rem; font-weight: 300; color: var(--text-mid); line-height: 1.8; margin-bottom: 36px;
+    /* Testimonials */
+    .testimonials-section { background: var(--black-soft); padding: 90px 56px; }
+    .testimonials-inner { max-width: 1240px; margin: 0 auto; }
+    .testimonials-head { text-align: center; margin-bottom: 56px; }
+    .testimonials-head .section-title { color: var(--white); }
+    .testimonials-head .section-sub { color: rgba(255,255,255,0.45); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: rgba(255,255,255,0.05); }
+    .testimonial-card {
+      background: var(--black-soft); padding: 44px 36px;
+      transition: background 0.3s;
     }
-    .contact-details { display: flex; flex-direction: column; gap: 22px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
-    .contact-item-icon {
-      width: 44px; height: 44px; background: var(--accent);
-      display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+    .testimonial-card:hover { background: #2a1e13; }
+    .testimonial-stars { color: var(--gold-light); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 20px; }
+    .testimonial-text {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 1.02rem; color: rgba(255,255,255,0.75); line-height: 1.75;
+      margin-bottom: 28px;
     }
-    .contact-item-label {
-      font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
-      letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-light); margin-bottom: 2px;
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .testimonial-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--gold); display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem;
+      color: var(--white); flex-shrink: 0;
     }
-    .contact-item-value { font-size: 0.95rem; font-weight: 500; color: var(--text-dark); }
-    .contact-item-value a { color: inherit; text-decoration: none; }
+    .testimonial-name { font-weight: 600; font-size: 0.88rem; color: rgba(255,255,255,0.85); }
+    .testimonial-role { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-top: 1px; }
 
-    .form-title {
-      font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700;
-      color: var(--text-dark); margin-bottom: 28px;
+    /* ═══════════════════════════════ PAGE: KONTAKT ═══════════════════════════════ */
+    .contact-split { display: grid; grid-template-columns: 1fr 1.1fr; gap: 90px; align-items: start; margin-top: 50px; }
+
+    .contact-lede {
+      font-size: 1.05rem; font-weight: 300; color: var(--text-mid);
+      line-height: 1.85; margin-bottom: 44px;
     }
-    .form-group { margin-bottom: 20px; }
+    .contact-details { display: flex; flex-direction: column; gap: 0; }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 18px;
+      padding: 22px 0; border-bottom: 1px solid var(--cream-dark);
+    }
+    .contact-item:first-child { padding-top: 0; }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-icon {
+      width: 46px; height: 46px; background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0; border-radius: 4px;
+    }
+    .contact-label {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-light); margin-bottom: 3px;
+    }
+    .contact-value { font-size: 1rem; font-weight: 500; color: var(--text-dark); }
+    .contact-value a { color: inherit; text-decoration: none; transition: color 0.2s; }
+    .contact-value a:hover { color: var(--gold); }
+
+    .form-card {
+      background: var(--warm-white); padding: 48px 44px;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.08);
+    }
+    .form-title {
+      font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700;
+      color: var(--text-dark); margin-bottom: 8px;
+    }
+    .form-subtitle { font-size: 0.88rem; color: var(--text-light); margin-bottom: 34px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
     .form-group label {
-      display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem;
-      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 8px;
+      display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 8px;
     }
     .form-group input,
     .form-group textarea,
     .form-group select {
-      width: 100%; background: var(--cream-dark); border: 1px solid transparent;
-      padding: 14px 18px; font-family: 'Barlow', sans-serif; font-size: 0.93rem;
-      color: var(--text-dark); outline: none; transition: border-color 0.3s; appearance: none;
+      width: 100%; background: var(--cream); border: 1.5px solid transparent;
+      border-bottom-color: var(--cream-mid);
+      padding: 13px 16px; font-family: 'Barlow', sans-serif; font-size: 0.93rem;
+      color: var(--text-dark); outline: none;
+      transition: border-color 0.3s, background 0.3s; appearance: none;
+      border-radius: 2px;
     }
     .form-group input:focus,
     .form-group textarea:focus,
-    .form-group select:focus { border-color: var(--accent); }
-    .form-group textarea { resize: vertical; min-height: 130px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group select:focus {
+      border-color: var(--gold); background: var(--warm-white);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
     .form-success {
-      display: none; background: #e8f5e9; border-left: 3px solid #4caf50;
-      padding: 14px 18px; font-size: 0.88rem; color: #2e7d32; margin-top: 14px;
+      display: none; margin-top: 16px;
+      background: #f0f9f0; border-left: 3px solid #5cb85c;
+      padding: 14px 18px; font-size: 0.88rem; color: #3d7a3d; border-radius: 2px;
     }
 
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--black); color: rgba(255,255,255,0.6); padding: 50px 50px 34px;
-    }
+    /* ═══════════════════════════════ FOOTER ═══════════════════════════════ */
+    footer { background: var(--black); color: rgba(255,255,255,0.5); padding: 64px 56px 36px; }
     .footer-inner {
-      max-width: 1300px; margin: 0 auto;
-      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; margin-bottom: 40px;
+      max-width: 1240px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 50px;
     }
     .footer-logo {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.5rem;
-      letter-spacing: 0.15em; color: var(--white); display: block; margin-bottom: 14px; line-height: 1;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 1.45rem; letter-spacing: 0.18em; color: var(--white);
+      display: block; margin-bottom: 6px;
     }
-    .footer-logo span {
-      display: block; font-size: 0.6rem; letter-spacing: 0.3em; font-weight: 500; margin-top: 2px; color: var(--brown-light);
+    .footer-logo-sub {
+      font-size: 0.56rem; letter-spacing: 0.38em; font-weight: 500;
+      color: var(--gold); display: block; margin-bottom: 16px;
     }
-    .footer-tagline { font-size: 0.83rem; line-height: 1.7; max-width: 280px; }
+    .footer-tagline { font-size: 0.83rem; line-height: 1.75; max-width: 240px; }
+    .footer-divider {
+      width: 32px; height: 1.5px; background: var(--gold); opacity: 0.4;
+      margin: 20px 0;
+    }
     .footer-col-title {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.78rem;
-      letter-spacing: 0.25em; text-transform: uppercase; color: var(--white); margin-bottom: 18px;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 0.73rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--white); margin-bottom: 20px;
     }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-links button {
-      color: rgba(255,255,255,0.55); background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.45); background: none; border: none; cursor: pointer;
       font-size: 0.83rem; font-family: 'Barlow', sans-serif; text-align: left; padding: 0;
       transition: color 0.3s;
     }
-    .footer-links button:hover { color: var(--brown-light); }
-    .footer-links .no-link { cursor: default; }
-    .footer-links .no-link:hover { color: rgba(255,255,255,0.55); }
+    .footer-links button:hover { color: var(--gold-light); }
+    .footer-links .no-btn { color: rgba(255,255,255,0.45); cursor: default; font-size: 0.83rem; }
+    .footer-links .no-btn:hover { color: rgba(255,255,255,0.45); }
     .footer-bottom {
-      max-width: 1300px; margin: 0 auto;
-      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
-      display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem;
+      max-width: 1240px; margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.07); padding-top: 26px;
+      display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem;
     }
-    .footer-bottom a { color: var(--brown-light); text-decoration: none; }
+    .footer-bottom a { color: var(--gold); text-decoration: none; }
+    .footer-bottom a:hover { text-decoration: underline; }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      nav { padding: 14px 20px; }
-      .nav-links { gap: 14px; }
-      .nav-links button { font-size: 0.75rem; }
-      .page-inner { padding: 90px 20px 50px; }
-      .about-grid, .contact-grid, .guarantees-grid { grid-template-columns: 1fr; gap: 36px; }
+    /* ═══════════════════════════════ RESPONSIVE ═══════════════════════════════ */
+    @media (max-width: 1024px) {
+      nav { padding: 0 28px; }
+      .page-inner { padding: 100px 28px 70px; }
+      .values-strip, .testimonials-section, .cert-strip, .guarantees-section { padding-left: 28px; padding-right: 28px; }
+      .services-hero { padding-left: 28px; padding-right: 28px; }
+      footer { padding-left: 28px; padding-right: 28px; }
       .services-grid { grid-template-columns: 1fr 1fr; }
+      .about-grid { gap: 50px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+    @media (max-width: 768px) {
+      .about-grid, .contact-split { grid-template-columns: 1fr; gap: 40px; }
       .references-grid { grid-template-columns: 1fr 1fr; }
-      .footer-inner { grid-template-columns: 1fr; gap: 28px; }
-      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .guarantees-grid, .values-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .hero-strip { display: none; }
       .form-row { grid-template-columns: 1fr; }
+      .badge-floating { display: none; }
     }
     @media (max-width: 580px) {
-      .services-grid, .references-grid, .guarantees-grid { grid-template-columns: 1fr; }
-      .hero-title { font-size: 3rem; }
+      .services-grid, .references-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
+      .hero-title { font-size: 3.2rem; }
+      .page-inner { padding: 90px 20px 60px; }
     }
   </style>
 </head>
@@ -485,96 +623,272 @@
 
 <!-- ─── NAVIGATION ─── -->
 <nav id="navbar">
-  <button class="logo-btn" onclick="goTo('hem')">TINGSTAD<span>MÅLERI</span></button>
+  <button class="logo-btn" onclick="goTo('hem')">
+    TINGSTAD
+    <span class="logo-sub">MÅLERI</span>
+  </button>
   <ul class="nav-links">
-    <li><button onclick="goTo('hem')" data-page="hem" class="active">Hem</button></li>
-    <li><button onclick="goTo('om')" data-page="om">Om oss</button></li>
-    <li><button onclick="goTo('tjanster')" data-page="tjanster">Tjänster</button></li>
+    <li><button onclick="goTo('hem')"       data-page="hem"        class="active">Hem</button></li>
+    <li><button onclick="goTo('om')"        data-page="om">Om oss</button></li>
+    <li><button onclick="goTo('tjanster')"  data-page="tjanster">Tjänster</button></li>
     <li><button onclick="goTo('referenser')" data-page="referenser">Referenser</button></li>
-    <li><button onclick="goTo('kontakt')" data-page="kontakt">Kontakt</button></li>
+    <li><button onclick="goTo('kontakt')"   data-page="kontakt" class="nav-cta">Kontakt</button></li>
   </ul>
 </nav>
 
 <div id="app">
 
-  <!-- ══════════════════════ PAGE: HEM ══════════════════════ -->
+  <!-- ══════════════════════════════ PAGE: HEM ══════════════════════════════ -->
   <div class="page active" id="page-hem">
     <div class="hero-bg" id="hero-bg" onclick="document.getElementById('hero-upload').click()">
+      <div class="hero-bg-img" id="hero-bg-img"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-grain"></div>
       <div class="hero-upload-hint">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
-        Klicka för att ladda upp hero-bild
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M3 15l5-5 4 4 3-3 6 6"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+        </svg>
+        <span>Klicka för att ladda upp hero-bild</span>
       </div>
       <input type="file" id="hero-upload" accept="image/*" style="display:none;" onchange="setHeroImage(this)" />
     </div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Göteborg · Sedan 1985</p>
-      <h1 class="hero-title">Tingstad<br>Måleri</h1>
-      <p class="hero-sub">Professionellt måleri med högsta kvalitet och service – alltid</p>
-      <button class="btn-primary" onclick="goTo('kontakt')">Begär offert</button>
+
+    <div class="hero-content" style="padding: 0 20px;">
+      <div class="hero-eyebrow">Göteborg · Sedan 1985</div>
+      <h1 class="hero-title">Tingstad<br><em>Måleri</em></h1>
+      <p class="hero-sub">Professionellt måleri med passion för hantverk och detaljer</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="goTo('kontakt')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.37a16 16 0 006.72 6.72l1.74-1.74a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 15.92z"/></svg>
+          Begär offert
+        </button>
+        <button class="btn-outline" style="color:rgba(255,255,255,0.85);border-color:rgba(255,255,255,0.3);" onmouseenter="this.style.background='rgba(255,255,255,0.1)';this.style.borderColor='rgba(255,255,255,0.6)'" onmouseleave="this.style.background='transparent';this.style.borderColor='rgba(255,255,255,0.3)'" onclick="goTo('tjanster')">
+          Våra tjänster
+        </button>
+      </div>
+    </div>
+
+    <button class="hero-scroll" onclick="goTo('om')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      Skrolla
+    </button>
+
+    <div class="hero-strip">
+      <div class="hero-strip-item">
+        <div class="hero-strip-num">35+</div>
+        <div class="hero-strip-label"><strong>Års erfarenhet</strong>Grundat 1985 i Göteborg</div>
+      </div>
+      <div class="hero-strip-item">
+        <div class="hero-strip-num">500+</div>
+        <div class="hero-strip-label"><strong>Genomförda projekt</strong>Privat &amp; kommersiellt</div>
+      </div>
+      <div class="hero-strip-item">
+        <div class="hero-strip-num">2 år</div>
+        <div class="hero-strip-label"><strong>Garanti</strong>På allt utfört arbete</div>
+      </div>
+      <div class="hero-strip-item">
+        <div class="hero-strip-num">100%</div>
+        <div class="hero-strip-label"><strong>Nöjd kundgaranti</strong>Din trygghet är vår prioritet</div>
+      </div>
     </div>
   </div>
 
-  <!-- ══════════════════════ PAGE: OM OSS ══════════════════════ -->
+  <!-- ══════════════════════════════ PAGE: OM OSS ══════════════════════════════ -->
   <div class="page" id="page-om">
     <div class="page-inner">
       <div class="about-grid">
-        <div class="about-img-wrap" onclick="document.getElementById('about-upload').click()">
-          <div class="img-placeholder" id="about-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
-            <span>Klicka för att ladda upp bild</span>
+        <div class="about-img-wrap reveal" onclick="document.getElementById('about-upload').click()">
+          <div class="about-img-inner">
+            <div class="img-placeholder" id="about-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M3 15l5-5 4 4 3-3 6 6"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+              </svg>
+              <span>Klicka för att ladda upp bild</span>
+            </div>
+            <img id="about-img" src="" alt="Om Tingstad Måleri" />
           </div>
-          <img id="about-img" src="" alt="Om oss" />
+          <div class="badge-floating">
+            <div class="badge-floating-num">35+</div>
+            <div class="badge-floating-label">ÅRS<br>ERFARENHET</div>
+          </div>
           <input type="file" id="about-upload" accept="image/*" style="display:none;" onchange="setAboutImage(this)" />
         </div>
-        <div>
+
+        <div class="about-text reveal reveal-delay-2">
           <span class="section-label">Om företaget</span>
-          <h2 class="section-title">Alltid med högsta<br>kvalitet och service</h2>
-          <p class="section-sub">Tingstad Måleri är ett modernt och erfaret måleriföretag baserat i Göteborg. Vi erbjuder professionella måleritjänster till privatpersoner, byggföretag, fastighetsförvaltare, fastighetsägare och bostadsrättsföreningar.</p>
-          <p class="section-sub" style="margin-top:14px;">Våra erfarna målare levererar hög kvalitet på alla typer av yt- och materialbehandlingar – inomhus som utomhus. Vi är medlemmar i Måleriföretagen och arbetar alltid miljömedvetet.</p>
+          <h2 class="section-title">Göteborgsmåleri<br>med stolthet och tradition</h2>
+          <p class="about-lead">Tingstad Måleri är ett modernt och erfaret måleriföretag baserat i Göteborg. Vi erbjuder professionella måleritjänster till privatpersoner, byggföretag, fastighetsförvaltare och bostadsrättsföreningar.</p>
+          <p class="about-body">Våra erfarna målare levererar hög kvalitet på alla typer av yt- och materialbehandlingar – inomhus som utomhus. Vi är medlemmar i Måleriföretagen och arbetar alltid miljömedvetet med material och metoder som håller.</p>
           <div class="stats-row">
-            <div><div class="stat-number">35+</div><div class="stat-label">Års erfarenhet</div></div>
-            <div><div class="stat-number">500+</div><div class="stat-label">Genomförda projekt</div></div>
-            <div><div class="stat-number">2 år</div><div class="stat-label">Garanti på allt arbete</div></div>
+            <div class="stat-item">
+              <div class="stat-num">35+</div>
+              <div class="stat-label">Års erfarenhet</div>
+            </div>
+            <div class="stat-item" style="border-left:2px solid var(--cream-dark);padding-left:24px;">
+              <div class="stat-num">500+</div>
+              <div class="stat-label">Genomförda projekt</div>
+            </div>
+            <div class="stat-item" style="border-left:2px solid var(--cream-dark);padding-left:24px;">
+              <div class="stat-num">2 år</div>
+              <div class="stat-label">Garanti på arbete</div>
+            </div>
+          </div>
+          <div style="margin-top:38px;">
+            <button class="btn-primary" onclick="goTo('kontakt')">Kontakta oss</button>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="values-strip">
+      <div class="values-strip-inner">
+        <div style="text-align:center;margin-bottom:44px;">
+          <span class="section-label">Vad vi står för</span>
+          <h2 class="section-title" style="color:var(--white);">Våra värderingar</h2>
+        </div>
+        <div class="values-grid">
+          <div class="value-item reveal">
+            <div class="value-icon">🤝</div>
+            <div class="value-title">Ärlighet & Transparens</div>
+            <p class="value-desc">Vi ger alltid rättvisa och tydliga offerter. Inga dolda kostnader – du vet alltid vad du betalar för innan vi sätter igång.</p>
+          </div>
+          <div class="value-item reveal reveal-delay-2">
+            <div class="value-icon">🎯</div>
+            <div class="value-title">Precision i varje detalj</div>
+            <p class="value-desc">Vi är stolta över varje uppdrag vi tar oss an. Qualité utan kompromisser – från förberedelse till slutresultat.</p>
+          </div>
+          <div class="value-item reveal reveal-delay-3">
+            <div class="value-icon">🌿</div>
+            <div class="value-title">Miljömedvetenhet</div>
+            <p class="value-desc">Vi väljer alltid miljöcertifierade material och arbetar med metoder som minimerar vår påverkan på naturen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <footer>
       <div class="footer-inner">
-        <div><span class="footer-logo">TINGSTAD<span>MÅLERI</span></span><p class="footer-tagline">Det moderna måleriföretaget i Göteborg. Alltid med högsta kvalitet och service.</p></div>
-        <div><div class="footer-col-title">Sidor</div><ul class="footer-links"><li><button onclick="goTo('hem')">Hem</button></li><li><button onclick="goTo('om')">Om oss</button></li><li><button onclick="goTo('tjanster')">Tjänster</button></li><li><button onclick="goTo('referenser')">Referenser</button></li><li><button onclick="goTo('kontakt')">Kontakt</button></li></ul></div>
-        <div><div class="footer-col-title">Kontakt</div><ul class="footer-links"><li><button class="no-link">0302-125 39</button></li><li><button class="no-link">Aröds Industriväg 68</button></li><li><button class="no-link">417 05 Göteborg</button></li></ul></div>
+        <div>
+          <span class="footer-logo">TINGSTAD</span>
+          <span class="footer-logo-sub">MÅLERI</span>
+          <p class="footer-tagline">Det moderna måleriföretaget i Göteborg. Alltid med högsta kvalitet och service.</p>
+          <div class="footer-divider"></div>
+        </div>
+        <div>
+          <div class="footer-col-title">Sidor</div>
+          <ul class="footer-links">
+            <li><button onclick="goTo('hem')">Hem</button></li>
+            <li><button onclick="goTo('om')">Om oss</button></li>
+            <li><button onclick="goTo('tjanster')">Tjänster</button></li>
+            <li><button onclick="goTo('referenser')">Referenser</button></li>
+            <li><button onclick="goTo('kontakt')">Kontakt</button></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Kontakt</div>
+          <ul class="footer-links">
+            <li><span class="no-btn">0302-125 39</span></li>
+            <li><span class="no-btn">Aröds Industriväg 68</span></li>
+            <li><span class="no-btn">417 05 Göteborg</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Öppettider</div>
+          <ul class="footer-links">
+            <li><span class="no-btn">Alltid öppet</span></li>
+            <li><span class="no-btn">Ring oss direkt</span></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-bottom"><span>© 2026 Tingstad Måleri AB.</span><span><a href="#">Integritetspolicy</a></span></div>
+      <div class="footer-bottom">
+        <span>© 2026 Tingstad Måleri AB. Alla rättigheter förbehållna.</span>
+        <span><a href="#">Integritetspolicy</a></span>
+      </div>
     </footer>
   </div>
 
-  <!-- ══════════════════════ PAGE: TJÄNSTER ══════════════════════ -->
+  <!-- ══════════════════════════════ PAGE: TJÄNSTER ══════════════════════════════ -->
   <div class="page" id="page-tjanster">
-    <div class="page-inner">
-      <div class="services-head">
-        <span class="section-label">Vad vi gör</span>
-        <h2 class="section-title center">Våra tjänster</h2>
-        <p class="section-sub center">Vi målar såväl utom- som inomhus, på olika material och ytor som väv, trä, plåt, puts, kalk och betong.</p>
+    <div class="services-hero">
+      <span class="section-label">Vad vi gör</span>
+      <h2 class="section-title" style="color:var(--white);">Våra tjänster</h2>
+      <p class="section-sub center" style="color:rgba(255,255,255,0.5);">Vi målar såväl utom- som inomhus, på olika material och ytor som väv, trä, plåt, puts, kalk och betong.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-num">01</span>
+        <div class="service-icon">🏠</div>
+        <div class="service-name">Inomhusmålning</div>
+        <p class="service-desc">Professionell målning av väggar, tak, snickerier och golv. Vi hanterar alla typer av material och ytskikt med noggrannhet.</p>
       </div>
-      <div class="services-grid">
-        <div class="service-card"><div class="service-icon">🏠</div><div class="service-name">Inomhusmålning</div><p class="service-desc">Professionell målning av väggar, tak, snickerier och golv. Vi hanterar alla typer av material och ytskikt.</p></div>
-        <div class="service-card"><div class="service-icon">🏗️</div><div class="service-name">Utomhusmålning</div><p class="service-desc">Fasader, trä, plåt och betong behandlas med rätt metod och material för långvarig hållbarhet.</p></div>
-        <div class="service-card"><div class="service-icon">🏢</div><div class="service-name">Kommersiella lokaler</div><p class="service-desc">Vi tar oss an kontor, butiker, hotell och industrilokaler med minimal störning för din verksamhet.</p></div>
-        <div class="service-card"><div class="service-icon">✨</div><div class="service-name">Tapetsering & puts</div><p class="service-desc">Tapetsering, kalkputs och dekorativa ytbehandlingar som ger dina rum en unik och tidlös karaktär.</p></div>
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-num">02</span>
+        <div class="service-icon">🏗️</div>
+        <div class="service-name">Utomhusmålning</div>
+        <p class="service-desc">Fasader, trä, plåt och betong behandlas med rätt metod och material för långvarig hållbarhet i alla väder.</p>
       </div>
-      <div style="margin-top:70px;">
-        <span class="section-label" style="text-align:center;display:block;">Tryggt &amp; enkelt</span>
-        <h2 class="section-title center">Våra garantier</h2>
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-num">03</span>
+        <div class="service-icon">🏢</div>
+        <div class="service-name">Kommersiella lokaler</div>
+        <p class="service-desc">Vi tar oss an kontor, butiker, hotell och industrilokaler med minimal störning för din pågående verksamhet.</p>
       </div>
-      <div class="guarantees-grid">
-        <div class="guarantee-card"><div class="guarantee-num">01</div><div><div class="guarantee-title">Nöjd kundgaranti</div><p class="guarantee-desc">Två års garanti på allt utfört arbete. Du har även rätt till en opartisk besiktning – för full trygghet.</p></div></div>
-        <div class="guarantee-card"><div class="guarantee-num">02</div><div><div class="guarantee-title">ROT-avdrag</div><p class="guarantee-desc">Ansök om ROT-avdrag varje år – upp till 50 000 kr per person. Täcker rena arbetskostnader.</p></div></div>
-        <div class="guarantee-card"><div class="guarantee-num">03</div><div><div class="guarantee-title">Certifierade hantverkare</div><p class="guarantee-desc">Alla våra målare är välutbildade och certifierade. Vi är stolta medlemmar i Måleriföretagen.</p></div></div>
-        <div class="guarantee-card"><div class="guarantee-num">04</div><div><div class="guarantee-title">Alltid öppet</div><p class="guarantee-desc">Vi är alltid tillgängliga för frågor och offertförfrågningar. Ring oss på 0302-125 39.</p></div></div>
+      <div class="service-card reveal reveal-delay-3">
+        <span class="service-num">04</span>
+        <div class="service-icon">✨</div>
+        <div class="service-name">Tapetsering & puts</div>
+        <p class="service-desc">Tapetsering, kalkputs och dekorativa ytbehandlingar som ger dina rum en unik och tidlös karaktär.</p>
       </div>
-      <div class="cert-strip">
-        <p class="cert-strip-title">Certifierade och godkända av</p>
+    </div>
+
+    <div class="guarantees-section">
+      <div class="guarantees-inner">
+        <div style="text-align:center;">
+          <span class="section-label">Tryggt &amp; enkelt</span>
+          <h2 class="section-title center">Våra garantier</h2>
+          <p class="section-sub center">Din trygghet är vår prioritet – från offert till färdigt uppdrag.</p>
+        </div>
+        <div class="guarantees-grid">
+          <div class="guarantee-card reveal">
+            <div class="guarantee-num">01</div>
+            <div>
+              <div class="guarantee-title">Nöjd kundgaranti</div>
+              <p class="guarantee-desc">Två års garanti på allt utfört arbete. Du har även rätt till en opartisk besiktning – för full trygghet och sinnesro.</p>
+            </div>
+          </div>
+          <div class="guarantee-card reveal reveal-delay-1">
+            <div class="guarantee-num">02</div>
+            <div>
+              <div class="guarantee-title">ROT-avdrag</div>
+              <p class="guarantee-desc">Ansök om ROT-avdrag varje år – upp till 50 000 kr per person. Täcker rena arbetskostnader vid renovering.</p>
+            </div>
+          </div>
+          <div class="guarantee-card reveal reveal-delay-2">
+            <div class="guarantee-num">03</div>
+            <div>
+              <div class="guarantee-title">Certifierade hantverkare</div>
+              <p class="guarantee-desc">Alla våra målare är välutbildade och certifierade. Vi är stolta medlemmar i Måleriföretagen med hög standard.</p>
+            </div>
+          </div>
+          <div class="guarantee-card reveal reveal-delay-3">
+            <div class="guarantee-num">04</div>
+            <div>
+              <div class="guarantee-title">Alltid tillgängliga</div>
+              <p class="guarantee-desc">Vi är alltid tillgängliga för frågor och offertförfrågningar. Ring oss på 0302-125 39 – vi svarar alltid snabbt.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-strip">
+      <div class="cert-strip-inner">
+        <p class="cert-title">Certifierade och godkända av</p>
         <div class="cert-logos">
           <div class="cert-item"><div class="cert-badge">🏅</div>MÅLERIFÖRETAGEN</div>
           <div class="cert-item"><div class="cert-badge">✓</div>FR2000 CERTIFIERAD</div>
@@ -583,76 +897,274 @@
         </div>
       </div>
     </div>
+
     <footer>
       <div class="footer-inner">
-        <div><span class="footer-logo">TINGSTAD<span>MÅLERI</span></span><p class="footer-tagline">Professionellt måleri i Göteborg med garanti och service.</p></div>
+        <div>
+          <span class="footer-logo">TINGSTAD</span>
+          <span class="footer-logo-sub">MÅLERI</span>
+          <p class="footer-tagline">Professionellt måleri i Göteborg med garanti och service.</p>
+        </div>
         <div><div class="footer-col-title">Sidor</div><ul class="footer-links"><li><button onclick="goTo('hem')">Hem</button></li><li><button onclick="goTo('om')">Om oss</button></li><li><button onclick="goTo('tjanster')">Tjänster</button></li><li><button onclick="goTo('referenser')">Referenser</button></li><li><button onclick="goTo('kontakt')">Kontakt</button></li></ul></div>
-        <div><div class="footer-col-title">Kontakt</div><ul class="footer-links"><li><button class="no-link">0302-125 39</button></li><li><button class="no-link">Aröds Industriväg 68, Göteborg</button></li></ul></div>
+        <div><div class="footer-col-title">Kontakt</div><ul class="footer-links"><li><span class="no-btn">0302-125 39</span></li><li><span class="no-btn">Aröds Industriväg 68</span></li><li><span class="no-btn">417 05 Göteborg</span></li></ul></div>
+        <div><div class="footer-col-title">Öppettider</div><ul class="footer-links"><li><span class="no-btn">Alltid öppet</span></li></ul></div>
       </div>
       <div class="footer-bottom"><span>© 2026 Tingstad Måleri AB.</span><span><a href="#">Integritetspolicy</a></span></div>
     </footer>
   </div>
 
-  <!-- ══════════════════════ PAGE: REFERENSER ══════════════════════ -->
+  <!-- ══════════════════════════════ PAGE: REFERENSER ══════════════════════════════ -->
   <div class="page" id="page-referenser">
     <div class="page-inner">
-      <div class="references-head">
+      <div class="references-head reveal">
         <span class="section-label">Vårt arbete</span>
         <h2 class="section-title center">Utvalda projekt</h2>
         <p class="section-sub center">Vi är stolta över varje uppdrag vi utfört – från privata hem till stora kommersiella fastigheter.</p>
       </div>
       <div class="references-grid">
-        <div class="ref-card"><div class="ref-img-wrap" onclick="triggerRefUpload(0)"><div class="ref-placeholder" id="ref-ph-0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="30"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg><span>Ladda upp bild</span></div><img id="ref-img-0" src="" alt="" /><input type="file" id="ref-upload-0" accept="image/*" style="display:none;" onchange="setRefImg(0)" /></div><div class="ref-overlay"><div class="ref-name">Hisingen Bostäder</div><div class="ref-desc">Renovering av 40 lägenheter – Göteborg</div></div></div>
-        <div class="ref-card"><div class="ref-img-wrap" onclick="triggerRefUpload(1)"><div class="ref-placeholder" id="ref-ph-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="30"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg><span>Ladda upp bild</span></div><img id="ref-img-1" src="" alt="" /><input type="file" id="ref-upload-1" accept="image/*" style="display:none;" onchange="setRefImg(1)" /></div><div class="ref-overlay"><div class="ref-name">Kontorsfastighet Lindholmen</div><div class="ref-desc">Fasad &amp; invändig renovering</div></div></div>
-        <div class="ref-card"><div class="ref-img-wrap" onclick="triggerRefUpload(2)"><div class="ref-placeholder" id="ref-ph-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="30"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg><span>Ladda upp bild</span></div><img id="ref-img-2" src="" alt="" /><input type="file" id="ref-upload-2" accept="image/*" style="display:none;" onchange="setRefImg(2)" /></div><div class="ref-overlay"><div class="ref-name">Boutiquehotell Centrum</div><div class="ref-desc">Komplett inredningsmålning</div></div></div>
-        <div class="ref-card"><div class="ref-img-wrap" onclick="triggerRefUpload(3)"><div class="ref-placeholder" id="ref-ph-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="30"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg><span>Ladda upp bild</span></div><img id="ref-img-3" src="" alt="" /><input type="file" id="ref-upload-3" accept="image/*" style="display:none;" onchange="setRefImg(3)" /></div><div class="ref-overlay"><div class="ref-name">Privata Villor</div><div class="ref-desc">In- och utvändig målning – Hovås &amp; Askim</div></div></div>
-        <div class="ref-card"><div class="ref-img-wrap" onclick="triggerRefUpload(4)"><div class="ref-placeholder" id="ref-ph-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="30"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg><span>Ladda upp bild</span></div><img id="ref-img-4" src="" alt="" /><input type="file" id="ref-upload-4" accept="image/*" style="display:none;" onchange="setRefImg(4)" /></div><div class="ref-overlay"><div class="ref-name">Industrilokal Mölndal</div><div class="ref-desc">Brandskyddsmålning av stålkonstruktion</div></div></div>
-        <div class="ref-card"><div class="ref-img-wrap" onclick="triggerRefUpload(5)"><div class="ref-placeholder" id="ref-ph-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="30"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg><span>Ladda upp bild</span></div><img id="ref-img-5" src="" alt="" /><input type="file" id="ref-upload-5" accept="image/*" style="display:none;" onchange="setRefImg(5)" /></div><div class="ref-overlay"><div class="ref-name">BRF Majorna</div><div class="ref-desc">Trapphusrenovering &amp; fasadbyte · 120 lgh</div></div></div>
+        <div class="ref-card reveal">
+          <div class="ref-img-wrap" onclick="triggerRefUpload(0)">
+            <div class="ref-placeholder" id="ref-ph-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+              <span>Ladda upp bild</span>
+            </div>
+            <img id="ref-img-0" src="" alt="" />
+            <input type="file" id="ref-upload-0" accept="image/*" style="display:none;" onchange="setRefImg(0)" />
+          </div>
+          <div class="ref-overlay">
+            <div class="ref-tag">Bostadsrenovering</div>
+            <div class="ref-name">Hisingen Bostäder</div>
+            <div class="ref-desc">Renovering av 40 lägenheter – Göteborg</div>
+          </div>
+        </div>
+
+        <div class="ref-card reveal reveal-delay-1">
+          <div class="ref-img-wrap" onclick="triggerRefUpload(1)">
+            <div class="ref-placeholder" id="ref-ph-1">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+              <span>Ladda upp bild</span>
+            </div>
+            <img id="ref-img-1" src="" alt="" />
+            <input type="file" id="ref-upload-1" accept="image/*" style="display:none;" onchange="setRefImg(1)" />
+          </div>
+          <div class="ref-overlay">
+            <div class="ref-tag">Kommersiellt</div>
+            <div class="ref-name">Kontorsfastighet Lindholmen</div>
+            <div class="ref-desc">Fasad &amp; invändig renovering</div>
+          </div>
+        </div>
+
+        <div class="ref-card reveal reveal-delay-2">
+          <div class="ref-img-wrap" onclick="triggerRefUpload(2)">
+            <div class="ref-placeholder" id="ref-ph-2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+              <span>Ladda upp bild</span>
+            </div>
+            <img id="ref-img-2" src="" alt="" />
+            <input type="file" id="ref-upload-2" accept="image/*" style="display:none;" onchange="setRefImg(2)" />
+          </div>
+          <div class="ref-overlay">
+            <div class="ref-tag">Hotell</div>
+            <div class="ref-name">Boutiquehotell Centrum</div>
+            <div class="ref-desc">Komplett inredningsmålning</div>
+          </div>
+        </div>
+
+        <div class="ref-card reveal">
+          <div class="ref-img-wrap" onclick="triggerRefUpload(3)">
+            <div class="ref-placeholder" id="ref-ph-3">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+              <span>Ladda upp bild</span>
+            </div>
+            <img id="ref-img-3" src="" alt="" />
+            <input type="file" id="ref-upload-3" accept="image/*" style="display:none;" onchange="setRefImg(3)" />
+          </div>
+          <div class="ref-overlay">
+            <div class="ref-tag">Villa</div>
+            <div class="ref-name">Privata Villor</div>
+            <div class="ref-desc">In- och utvändig målning – Hovås &amp; Askim</div>
+          </div>
+        </div>
+
+        <div class="ref-card reveal reveal-delay-1">
+          <div class="ref-img-wrap" onclick="triggerRefUpload(4)">
+            <div class="ref-placeholder" id="ref-ph-4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+              <span>Ladda upp bild</span>
+            </div>
+            <img id="ref-img-4" src="" alt="" />
+            <input type="file" id="ref-upload-4" accept="image/*" style="display:none;" onchange="setRefImg(4)" />
+          </div>
+          <div class="ref-overlay">
+            <div class="ref-tag">Industri</div>
+            <div class="ref-name">Industrilokal Mölndal</div>
+            <div class="ref-desc">Brandskyddsmålning av stålkonstruktion</div>
+          </div>
+        </div>
+
+        <div class="ref-card reveal reveal-delay-2">
+          <div class="ref-img-wrap" onclick="triggerRefUpload(5)">
+            <div class="ref-placeholder" id="ref-ph-5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+              <span>Ladda upp bild</span>
+            </div>
+            <img id="ref-img-5" src="" alt="" />
+            <input type="file" id="ref-upload-5" accept="image/*" style="display:none;" onchange="setRefImg(5)" />
+          </div>
+          <div class="ref-overlay">
+            <div class="ref-tag">BRF</div>
+            <div class="ref-name">BRF Majorna</div>
+            <div class="ref-desc">Trapphusrenovering &amp; fasadbyte · 120 lgh</div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="testimonials-section">
+      <div class="testimonials-inner">
+        <div class="testimonials-head">
+          <span class="section-label">Vad kunderna säger</span>
+          <h2 class="section-title" style="color:var(--white);">Omdömen</h2>
+          <p class="section-sub center" style="color:rgba(255,255,255,0.45);">Vi mäter alltid vår framgång i nöjda kunder.</p>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card reveal">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Extremt professionellt genomförande. Tingstad levererade ett fantastiskt resultat och höll både tid och budget. Kan varmt rekommendera."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">M</div>
+              <div>
+                <div class="testimonial-name">Maria Lindqvist</div>
+                <div class="testimonial-role">Privatperson, Hovås</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal reveal-delay-2">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Vi anlitade Tingstad för renovering av våra trapphus. Absolut felfritt jobb – snyggt, städat och utan störningar för de boende."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">J</div>
+              <div>
+                <div class="testimonial-name">Johan Bergström</div>
+                <div class="testimonial-role">Styrelseordförande, BRF</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal reveal-delay-3">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Proffsiga, punktliga och väldigt noggranna. Fasadjobbet blev precis som vi hoppades på. Vi kommer definitivt använda dem igen."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">A</div>
+              <div>
+                <div class="testimonial-name">Anna Karlsson</div>
+                <div class="testimonial-role">Fastighetsförvaltare</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <footer>
       <div class="footer-inner">
-        <div><span class="footer-logo">TINGSTAD<span>MÅLERI</span></span><p class="footer-tagline">Professionellt måleri i Göteborg med garanti och service.</p></div>
-        <div><div class="footer-col-title">Sidor</div><ul class="footer-links"><li><button onclick="goTo('hem')">Hem</button></li><li><button onclick="goTo('om')">Om oss</button></li><li><button onclick="goTo('tjanster')">Tjänster</button></li><li><button onclick="goTo('referenser')">Referenser</button></li><li><button onclick="goTo('kontakt')">Kontakt</button></li></ul></div>
-        <div><div class="footer-col-title">Kontakt</div><ul class="footer-links"><li><button class="no-link">0302-125 39</button></li><li><button class="no-link">Aröds Industriväg 68, Göteborg</button></li></ul></div>
+        <div>
+          <span class="footer-logo">TINGSTAD</span>
+          <span class="footer-logo-sub">MÅLERI</span>
+          <p class="footer-tagline">Professionellt måleri i Göteborg med garanti och service.</p>
+        </div>
+        <div><div class="footer-col-title">Sidor</div><ul class="footer-links"><li><button onclick="goTo('hem')">Hem</button></li><li><button onclick="goTo('om')">Om oss</button></li><li><button onclick="goTo('tjanster')">Tjänster</button></li><li><button onclick="goTo('referenser')">Referencer</button></li><li><button onclick="goTo('kontakt')">Kontakt</button></li></ul></div>
+        <div><div class="footer-col-title">Kontakt</div><ul class="footer-links"><li><span class="no-btn">0302-125 39</span></li><li><span class="no-btn">Aröds Industriväg 68, Göteborg</span></li></ul></div>
+        <div><div class="footer-col-title">Öppettider</div><ul class="footer-links"><li><span class="no-btn">Alltid öppet</span></li></ul></div>
       </div>
       <div class="footer-bottom"><span>© 2026 Tingstad Måleri AB.</span><span><a href="#">Integritetspolicy</a></span></div>
     </footer>
   </div>
 
-  <!-- ══════════════════════ PAGE: KONTAKT ══════════════════════ -->
+  <!-- ══════════════════════════════ PAGE: KONTAKT ══════════════════════════════ -->
   <div class="page" id="page-kontakt">
     <div class="page-inner">
       <span class="section-label">Hör av dig</span>
       <h2 class="section-title">Kontakta oss</h2>
-      <div class="contact-grid" style="margin-top:40px;">
-        <div class="contact-info">
-          <p>Har du ett projekt du vill diskutera, eller vill ha en kostnadsfri offert? Fyll i formuläret eller kontakta oss direkt – vi svarar alltid snabbt.</p>
+
+      <div class="contact-split">
+        <div class="reveal">
+          <p class="contact-lede">Har du ett projekt du vill diskutera, eller vill ha en kostnadsfri offert? Fyll i formuläret eller kontakta oss direkt – vi svarar alltid snabbt.</p>
           <div class="contact-details">
-            <div class="contact-item"><div class="contact-item-icon">📞</div><div><div class="contact-item-label">Telefon</div><div class="contact-item-value"><a href="tel:030212539">0302-125 39</a></div></div></div>
-            <div class="contact-item"><div class="contact-item-icon">📍</div><div><div class="contact-item-label">Adress</div><div class="contact-item-value">Aröds Industriväg 68<br>417 05 Göteborg</div></div></div>
-            <div class="contact-item"><div class="contact-item-icon">🕐</div><div><div class="contact-item-label">Öppettider</div><div class="contact-item-value">Alltid öppet</div></div></div>
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div>
+                <div class="contact-label">Telefon</div>
+                <div class="contact-value"><a href="tel:030212539">0302-125 39</a></div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div>
+                <div class="contact-label">Adress</div>
+                <div class="contact-value">Aröds Industriväg 68<br>417 05 Göteborg</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">🕐</div>
+              <div>
+                <div class="contact-label">Tillgänglighet</div>
+                <div class="contact-value">Alltid öppet</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <div class="form-title">Skicka ett meddelande</div>
+
+        <div class="form-card reveal reveal-delay-2">
+          <div class="form-title">Skicka en offertförfrågan</div>
+          <div class="form-subtitle">Vi återkommer inom en arbetsdag.</div>
           <div class="form-row">
-            <div class="form-group"><label>Namn *</label><input type="text" id="inp-namn" placeholder="Ditt namn" /></div>
-            <div class="form-group"><label>Telefon</label><input type="tel" id="inp-tel" placeholder="070-xxx xx xx" /></div>
+            <div class="form-group">
+              <label>Namn *</label>
+              <input type="text" id="inp-namn" placeholder="Ditt namn" />
+            </div>
+            <div class="form-group">
+              <label>Telefon</label>
+              <input type="tel" id="inp-tel" placeholder="070-xxx xx xx" />
+            </div>
           </div>
-          <div class="form-group"><label>E-post *</label><input type="email" id="inp-email" placeholder="din@epost.se" /></div>
-          <div class="form-group"><label>Tjänst</label><select id="inp-service"><option value="">– Välj tjänst –</option><option>Inomhusmålning</option><option>Utomhusmålning</option><option>Kommersiell lokal</option><option>Tapetsering &amp; puts</option><option>Övrigt</option></select></div>
-          <div class="form-group"><label>Meddelande *</label><textarea id="inp-msg" placeholder="Berätta om ditt projekt..."></textarea></div>
-          <button class="btn-primary" onclick="submitForm()">Skicka meddelande</button>
+          <div class="form-group">
+            <label>E-post *</label>
+            <input type="email" id="inp-email" placeholder="din@epost.se" />
+          </div>
+          <div class="form-group">
+            <label>Tjänst</label>
+            <select id="inp-service">
+              <option value="">– Välj tjänst –</option>
+              <option>Inomhusmålning</option>
+              <option>Utomhusmålning</option>
+              <option>Kommersiell lokal</option>
+              <option>Tapetsering &amp; puts</option>
+              <option>Övrigt</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Meddelande *</label>
+            <textarea id="inp-msg" placeholder="Berätta om ditt projekt – storlek, material, önskemål..."></textarea>
+          </div>
+          <button class="btn-primary" onclick="submitForm()" style="width:100%;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Skicka meddelande
+          </button>
           <div class="form-success" id="form-success">✓ Tack! Vi återkommer till dig inom kort.</div>
         </div>
       </div>
     </div>
+
     <footer>
       <div class="footer-inner">
-        <div><span class="footer-logo">TINGSTAD<span>MÅLERI</span></span><p class="footer-tagline">Professionellt måleri i Göteborg med garanti och service.</p></div>
-        <div><div class="footer-col-title">Sidor</div><ul class="footer-links"><li><button onclick="goTo('hem')">Hem</button></li><li><button onclick="goTo('om')">Om oss</button></li><li><button onclick="goTo('tjanster')">Tjänster</button></li><li><button onclick="goTo('referenser')">Referenser</button></li><li><button onclick="goTo('kontakt')">Kontakt</button></li></ul></div>
-        <div><div class="footer-col-title">Kontakt</div><ul class="footer-links"><li><button class="no-link">0302-125 39</button></li><li><button class="no-link">Aröds Industriväg 68, Göteborg</button></li></ul></div>
+        <div>
+          <span class="footer-logo">TINGSTAD</span>
+          <span class="footer-logo-sub">MÅLERI</span>
+          <p class="footer-tagline">Professionellt måleri i Göteborg med garanti och service.</p>
+        </div>
+        <div><div class="footer-col-title">Sidor</div><ul class="footer-links"><li><button onclick="goTo('hem')">Hem</button></li><li><button onclick="goTo('om')">Om oss</button></li><li><button onclick="goTo('tjanster')">Tjänster</button></li><li><button onclick="goTo('referenser')">Referencer</button></li><li><button onclick="goTo('kontakt')">Kontakt</button></li></ul></div>
+        <div><div class="footer-col-title">Kontakt</div><ul class="footer-links"><li><span class="no-btn">0302-125 39</span></li><li><span class="no-btn">Aröds Industriväg 68, Göteborg</span></li></ul></div>
+        <div><div class="footer-col-title">Öppettider</div><ul class="footer-links"><li><span class="no-btn">Alltid öppet</span></li></ul></div>
       </div>
       <div class="footer-bottom"><span>© 2026 Tingstad Måleri AB.</span><span><a href="#">Integritetspolicy</a></span></div>
     </footer>
@@ -668,43 +1180,40 @@
     const oldEl = document.getElementById('page-' + current);
     const newEl = document.getElementById('page-' + pageId);
 
-    // Slide old page out to the left
     oldEl.classList.remove('active');
     oldEl.classList.add('out-left');
 
-    // Position new page off-screen right (instant, no transition)
     newEl.style.transition = 'none';
     newEl.style.opacity = '0';
-    newEl.style.transform = 'translateX(60px)';
+    newEl.style.transform = 'translateX(70px)';
     newEl.classList.remove('out-left');
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        // Animate new page in
-        newEl.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+        newEl.style.transition = 'opacity 0.5s cubic-bezier(.4,0,.2,1), transform 0.5s cubic-bezier(.4,0,.2,1)';
         newEl.style.opacity = '1';
         newEl.style.transform = 'translateX(0)';
         newEl.classList.add('active');
         newEl.scrollTop = 0;
 
-        // Clean up old page after transition
         setTimeout(() => {
           oldEl.classList.remove('out-left');
           oldEl.style.opacity = '';
           oldEl.style.transform = '';
           oldEl.style.transition = '';
-        }, 460);
+        }, 510);
+
+        // Trigger reveal animations on new page
+        setTimeout(() => observeReveals(newEl), 100);
       });
     });
 
     current = pageId;
 
-    // Update nav button states
     document.querySelectorAll('.nav-links button[data-page]').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.page === pageId);
     });
 
-    // Nav bar style
     const navbar = document.getElementById('navbar');
     if (pageId === 'hem') {
       navbar.classList.remove('solid');
@@ -713,20 +1222,37 @@
     }
   }
 
-  // Make nav solid when non-hero pages scroll
+  // Scroll-based nav on non-hero pages
   document.querySelectorAll('.page:not(#page-hem)').forEach(p => {
     p.addEventListener('scroll', () => document.getElementById('navbar').classList.add('solid'));
   });
+
+  // ── REVEAL ANIMATIONS ──
+  function observeReveals(container) {
+    const els = (container || document).querySelectorAll('.reveal:not(.visible)');
+    if (!els.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  }
+
+  // Init reveals on first page
+  observeReveals(document.getElementById('page-hem'));
 
   // ── IMAGE UPLOADS ──
   function setHeroImage(input) {
     if (!input.files[0]) return;
     const url = URL.createObjectURL(input.files[0]);
-    const bg = document.getElementById('hero-bg');
-    bg.style.backgroundImage = `linear-gradient(to bottom,rgba(20,15,10,.6) 0%,rgba(20,15,10,.3) 50%,rgba(20,15,10,.7) 100%),url('${url}')`;
-    bg.style.backgroundSize = 'cover';
-    bg.style.backgroundPosition = 'center';
-    bg.classList.add('has-image');
+    const bgImg = document.getElementById('hero-bg-img');
+    bgImg.style.backgroundImage = `url('${url}')`;
+    bgImg.classList.add('loaded');
+    document.getElementById('hero-bg').classList.add('has-image');
   }
 
   function setAboutImage(input) {
@@ -749,12 +1275,14 @@
 
   // ── CONTACT FORM ──
   function submitForm() {
-    const namn = document.getElementById('inp-namn').value.trim();
+    const namn  = document.getElementById('inp-namn').value.trim();
     const email = document.getElementById('inp-email').value.trim();
-    const msg = document.getElementById('inp-msg').value.trim();
+    const msg   = document.getElementById('inp-msg').value.trim();
     if (!namn || !email || !msg) { alert('Fyll i namn, e-post och meddelande.'); return; }
-    document.getElementById('form-success').style.display = 'block';
+    const success = document.getElementById('form-success');
+    success.style.display = 'block';
     ['inp-namn','inp-tel','inp-email','inp-msg'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('inp-service').value = '';
   }
 </script>
 </body>
