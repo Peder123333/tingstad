@@ -3,7 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tingstad Måleri – Göteborg</title>
+
+  <!-- ─── PRIMARY SEO ─── -->
+  <title>Tingstad Måleri – Målare i Göteborg | Fasad, Inomhus & Tapetsering</title>
+  <meta name="description" content="Tingstad Måleri är ett certifierat måleriföretag i Göteborg med över 35 års erfarenhet. Vi erbjuder inomhusmålning, fasadmålning, tapetsering och puts till privatpersoner och företag. Begär offert idag!" />
+  <meta name="keywords" content="målare göteborg, måleriföretag göteborg, fasadmålning göteborg, inomhusmålning göteborg, tapetsering göteborg, målare hisingen, ROT-avdrag målning, bostadsrättsmålning, kommersiell målning göteborg" />
+  <meta name="author" content="Tingstad Måleri AB" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://peder123333.github.io/tingstad/" />
+
+  <!-- ─── OPEN GRAPH (Facebook, LinkedIn) ─── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://peder123333.github.io/tingstad/" />
+  <meta property="og:title" content="Tingstad Måleri – Certifierad målare i Göteborg" />
+  <meta property="og:description" content="Professionellt måleriföretag i Göteborg sedan 1985. Inomhus, fasad, tapetsering och puts. Nöjd kundgaranti och ROT-avdrag." />
+  <meta property="og:locale" content="sv_SE" />
+  <meta property="og:site_name" content="Tingstad Måleri" />
+
+  <!-- ─── TWITTER CARD ─── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tingstad Måleri – Målare i Göteborg" />
+  <meta name="twitter:description" content="Certifierat måleriföretag i Göteborg sedan 1985. Fasad, inomhus, tapetsering. Begär offert idag!" />
+
+  <!-- ─── GEO / LOCAL SEO ─── -->
+  <meta name="geo.region" content="SE-O" />
+  <meta name="geo.placename" content="Göteborg" />
+  <meta name="geo.position" content="57.7089;11.9746" />
+  <meta name="ICBM" content="57.7089, 11.9746" />
+
+  <!-- ─── STRUCTURED DATA (JSON-LD) ─── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Tingstad Måleri AB",
+    "description": "Professionellt måleriföretag i Göteborg sedan 1985. Vi erbjuder inomhusmålning, fasadmålning, tapetsering och puts till privatpersoner, bostadsrättsföreningar och företag.",
+    "url": "https://peder123333.github.io/tingstad/",
+    "telephone": "+46302-12539",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Aröds Industriväg 68",
+      "postalCode": "417 05",
+      "addressLocality": "Göteborg",
+      "addressCountry": "SE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 57.7089,
+      "longitude": 11.9746
+    },
+    "openingHours": "Mo-Su 00:00-23:59",
+    "priceRange": "$$",
+    "currenciesAccepted": "SEK",
+    "paymentAccepted": "Cash, Invoice, ROT-avdrag",
+    "areaServed": ["Göteborg", "Hisingen", "Mölndal", "Kungsbacka", "Kungälv"],
+    "serviceType": ["Inomhusmålning", "Fasadmålning", "Tapetsering", "Kalkputs", "Brandskyddsmålning"],
+    "foundingDate": "1985",
+    "memberOf": {
+      "@type": "Organization",
+      "name": "Måleriföretagen"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "3"
+    }
+  }
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -622,7 +689,7 @@
 <body>
 
 <!-- ─── NAVIGATION ─── -->
-<nav id="navbar">
+<nav id="navbar" role="navigation" aria-label="Huvudnavigation">
   <button class="logo-btn" onclick="goTo('hem')">
     TINGSTAD
     <span class="logo-sub">MÅLERI</span>
@@ -639,7 +706,7 @@
 <div id="app">
 
   <!-- ══════════════════════════════ PAGE: HEM ══════════════════════════════ -->
-  <div class="page active" id="page-hem">
+  <div class="page active" id="page-hem" role="main" aria-label="Startsida">
     <div class="hero-bg" id="hero-bg" onclick="document.getElementById('hero-upload').click()">
       <div class="hero-bg-img" id="hero-bg-img"></div>
       <div class="hero-overlay"></div>
@@ -658,7 +725,7 @@
     <div class="hero-content" style="padding: 0 20px;">
       <div class="hero-eyebrow">Göteborg · Sedan 1985</div>
       <h1 class="hero-title">Tingstad<br><em>Måleri</em></h1>
-      <p class="hero-sub">Professionellt måleri med passion för hantverk och detaljer</p>
+      <p class="hero-sub">Certifierad målare i Göteborg – inomhus, fasad och tapetsering med passion för hantverk</p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="goTo('kontakt')">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.37a16 16 0 006.72 6.72l1.74-1.74a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 15.92z"/></svg>
@@ -696,7 +763,7 @@
   </div>
 
   <!-- ══════════════════════════════ PAGE: OM OSS ══════════════════════════════ -->
-  <div class="page" id="page-om">
+  <div class="page" id="page-om" aria-label="Om Tingstad Måleri">
     <div class="page-inner">
       <div class="about-grid">
         <div class="about-img-wrap reveal" onclick="document.getElementById('about-upload').click()">
@@ -721,8 +788,8 @@
         <div class="about-text reveal reveal-delay-2">
           <span class="section-label">Om företaget</span>
           <h2 class="section-title">Göteborgsmåleri<br>med stolthet och tradition</h2>
-          <p class="about-lead">Tingstad Måleri är ett modernt och erfaret måleriföretag baserat i Göteborg. Vi erbjuder professionella måleritjänster till privatpersoner, byggföretag, fastighetsförvaltare och bostadsrättsföreningar.</p>
-          <p class="about-body">Våra erfarna målare levererar hög kvalitet på alla typer av yt- och materialbehandlingar – inomhus som utomhus. Vi är medlemmar i Måleriföretagen och arbetar alltid miljömedvetet med material och metoder som håller.</p>
+          <p class="about-lead">Tingstad Måleri AB är ett modernt och erfaret måleriföretag baserat i Göteborg sedan 1985. Vi erbjuder professionella måleritjänster till privatpersoner, byggföretag, fastighetsförvaltare och bostadsrättsföreningar i hela Göteborgsregionen.</p>
+          <p class="about-body">Våra certifierade målare i Göteborg levererar hög kvalitet på alla typer av yt- och materialbehandlingar – inomhus som utomhus. Vi är medlemmar i Måleriföretagen, FR2000-certifierade och arbetar alltid miljömedvetet. Vi erbjuder även ROT-avdrag på arbeten i privatbostäder.</p>
           <div class="stats-row">
             <div class="stat-item">
               <div class="stat-num">35+</div>
@@ -812,37 +879,37 @@
   </div>
 
   <!-- ══════════════════════════════ PAGE: TJÄNSTER ══════════════════════════════ -->
-  <div class="page" id="page-tjanster">
+  <div class="page" id="page-tjanster" aria-label="Tjänster – målare Göteborg">
     <div class="services-hero">
-      <span class="section-label">Vad vi gör</span>
-      <h2 class="section-title" style="color:var(--white);">Våra tjänster</h2>
-      <p class="section-sub center" style="color:rgba(255,255,255,0.5);">Vi målar såväl utom- som inomhus, på olika material och ytor som väv, trä, plåt, puts, kalk och betong.</p>
+      <span class="section-label">Målare Göteborg</span>
+      <h2 class="section-title" style="color:var(--white);">Våra måleritjänster i Göteborg</h2>
+      <p class="section-sub center" style="color:rgba(255,255,255,0.5);">Vi målar såväl utom- som inomhus i Göteborg, på olika material och ytor som väv, trä, plåt, puts, kalk och betong. Certifierade målare med 35+ års erfarenhet.</p>
     </div>
 
     <div class="services-grid">
       <div class="service-card reveal">
         <span class="service-num">01</span>
         <div class="service-icon">🏠</div>
-        <div class="service-name">Inomhusmålning</div>
-        <p class="service-desc">Professionell målning av väggar, tak, snickerier och golv. Vi hanterar alla typer av material och ytskikt med noggrannhet.</p>
+        <div class="service-name">Inomhusmålning Göteborg</div>
+        <p class="service-desc">Professionell inomhusmålning av väggar, tak, snickerier och golv i Göteborg. Vi hanterar alla typer av material och ytskikt med noggrannhet och hög kvalitet.</p>
       </div>
       <div class="service-card reveal reveal-delay-1">
         <span class="service-num">02</span>
         <div class="service-icon">🏗️</div>
-        <div class="service-name">Utomhusmålning</div>
-        <p class="service-desc">Fasader, trä, plåt och betong behandlas med rätt metod och material för långvarig hållbarhet i alla väder.</p>
+        <div class="service-name">Fasadmålning Göteborg</div>
+        <p class="service-desc">Fasadmålning i Göteborg – trä, plåt och betong behandlas med rätt metod och material för långvarig hållbarhet i alla väder.</p>
       </div>
       <div class="service-card reveal reveal-delay-2">
         <span class="service-num">03</span>
         <div class="service-icon">🏢</div>
-        <div class="service-name">Kommersiella lokaler</div>
-        <p class="service-desc">Vi tar oss an kontor, butiker, hotell och industrilokaler med minimal störning för din pågående verksamhet.</p>
+        <div class="service-name">Kommersiell målning</div>
+        <p class="service-desc">Målning av kontor, butiker, hotell och industrilokaler i Göteborg med minimal störning för din pågående verksamhet.</p>
       </div>
       <div class="service-card reveal reveal-delay-3">
         <span class="service-num">04</span>
         <div class="service-icon">✨</div>
         <div class="service-name">Tapetsering & puts</div>
-        <p class="service-desc">Tapetsering, kalkputs och dekorativa ytbehandlingar som ger dina rum en unik och tidlös karaktär.</p>
+        <p class="service-desc">Tapetsering, kalkputs och dekorativa ytbehandlingar i Göteborg som ger dina rum en unik och tidlös karaktär.</p>
       </div>
     </div>
 
@@ -914,12 +981,12 @@
   </div>
 
   <!-- ══════════════════════════════ PAGE: REFERENSER ══════════════════════════════ -->
-  <div class="page" id="page-referenser">
+  <div class="page" id="page-referenser" aria-label="Referensprojekt – målare Göteborg">
     <div class="page-inner">
       <div class="references-head reveal">
-        <span class="section-label">Vårt arbete</span>
-        <h2 class="section-title center">Utvalda projekt</h2>
-        <p class="section-sub center">Vi är stolta över varje uppdrag vi utfört – från privata hem till stora kommersiella fastigheter.</p>
+        <span class="section-label">Målare Göteborg – vårt arbete</span>
+        <h2 class="section-title center">Referensprojekt i Göteborg</h2>
+        <p class="section-sub center">Vi är stolta över varje uppdrag vi utfört – från privata hem i Hovås och Askim till stora kommersiella fastigheter i centrala Göteborg.</p>
       </div>
       <div class="references-grid">
         <div class="ref-card reveal">
@@ -928,7 +995,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
               <span>Ladda upp bild</span>
             </div>
-            <img id="ref-img-0" src="" alt="" />
+            <img id="ref-img-0" src="" alt="Inomhusmålning Hisingen Bostäder – Tingstad Måleri Göteborg" />
             <input type="file" id="ref-upload-0" accept="image/*" style="display:none;" onchange="setRefImg(0)" />
           </div>
           <div class="ref-overlay">
@@ -944,7 +1011,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
               <span>Ladda upp bild</span>
             </div>
-            <img id="ref-img-1" src="" alt="" />
+            <img id="ref-img-1" src="" alt="Fasadmålning kontorsfastighet Lindholmen Göteborg – Tingstad Måleri" />
             <input type="file" id="ref-upload-1" accept="image/*" style="display:none;" onchange="setRefImg(1)" />
           </div>
           <div class="ref-overlay">
@@ -960,7 +1027,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
               <span>Ladda upp bild</span>
             </div>
-            <img id="ref-img-2" src="" alt="" />
+            <img id="ref-img-2" src="" alt="Inredningsmålning boutiquehotell Göteborg centrum – Tingstad Måleri" />
             <input type="file" id="ref-upload-2" accept="image/*" style="display:none;" onchange="setRefImg(2)" />
           </div>
           <div class="ref-overlay">
@@ -976,7 +1043,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
               <span>Ladda upp bild</span>
             </div>
-            <img id="ref-img-3" src="" alt="" />
+            <img id="ref-img-3" src="" alt="Villmålning Hovås och Askim Göteborg – Tingstad Måleri" />
             <input type="file" id="ref-upload-3" accept="image/*" style="display:none;" onchange="setRefImg(3)" />
           </div>
           <div class="ref-overlay">
@@ -992,7 +1059,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
               <span>Ladda upp bild</span>
             </div>
-            <img id="ref-img-4" src="" alt="" />
+            <img id="ref-img-4" src="" alt="Brandskyddsmålning industrilokal Mölndal – Tingstad Måleri Göteborg" />
             <input type="file" id="ref-upload-4" accept="image/*" style="display:none;" onchange="setRefImg(4)" />
           </div>
           <div class="ref-overlay">
@@ -1008,7 +1075,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
               <span>Ladda upp bild</span>
             </div>
-            <img id="ref-img-5" src="" alt="" />
+            <img id="ref-img-5" src="" alt="Trapphusrenovering och fasadmålning BRF Majorna Göteborg – Tingstad Måleri" />
             <input type="file" id="ref-upload-5" accept="image/*" style="display:none;" onchange="setRefImg(5)" />
           </div>
           <div class="ref-overlay">
@@ -1081,10 +1148,10 @@
   </div>
 
   <!-- ══════════════════════════════ PAGE: KONTAKT ══════════════════════════════ -->
-  <div class="page" id="page-kontakt">
+  <div class="page" id="page-kontakt" aria-label="Kontakta Tingstad Måleri Göteborg">
     <div class="page-inner">
-      <span class="section-label">Hör av dig</span>
-      <h2 class="section-title">Kontakta oss</h2>
+      <span class="section-label">Målare Göteborg – offert</span>
+      <h2 class="section-title">Kontakta Tingstad Måleri i Göteborg</h2>
 
       <div class="contact-split">
         <div class="reveal">
